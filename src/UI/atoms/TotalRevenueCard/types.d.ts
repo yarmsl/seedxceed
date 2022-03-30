@@ -1,0 +1,3 @@
+interface ITotalRevenueCardProps {
+  summ: number;
+}

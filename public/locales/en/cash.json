@@ -1,0 +1,18 @@
+{
+  "revenue": "Revenue",
+  "total": "Total",
+  "toTransfer": "To be transferred",
+  "ordered": "Ordered",
+  "topSellings": "Bestsellers",
+  "paymentStory": "Payment history",
+  "orderNum": "Order number",
+  "date": "Date",
+  "appoint": "Appointment",
+  "price": "Price",
+  "status": "Status",
+  "noPay": "You have not made payments",
+  "confirmed": "Confirmed",
+  "unconfirmed": "Unconfirmed",
+  "scaner": "Scanner",
+  "restorer": "Restorer"
+}

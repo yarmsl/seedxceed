@@ -1,0 +1,3 @@
+interface IPayChartProps {
+  isLoading: boolean;
+}

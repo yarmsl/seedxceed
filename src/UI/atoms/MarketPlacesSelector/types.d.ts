@@ -1,0 +1,3 @@
+interface IMarketPlacesSelectorProps {
+  isPortable: boolean;
+}

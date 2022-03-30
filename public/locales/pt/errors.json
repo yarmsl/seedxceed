@@ -1,0 +1,22 @@
+{
+  "incorrectEmail": "E-mail incorreto",
+  "required": "Campo obrigatório",
+  "wrongPassLogin": "Senha ou login errado",
+  "invalidPhone": "Número de telefone inválido",
+  "shortPass": "Senha muito curta",
+  "userExists": "Falha, provavelmente o usuário existe",
+  "invalid": "inválido",
+  "incorrect": "incorreta",
+  "userNotFound": "Não existe tal utilizador",
+  "enterEmail": "Digite seu e-mail",
+  "enterPassword": "Digite a senha",
+  "enterPhone": "Digite o número de telefone",
+  "confirm2Continue": "Confirme para continuar",
+  "passMismatch": "Senha incorreta",
+  "passContain": "A senha deve conter letras e números",
+  "min": "Mínimo de",
+  "max": "Máximo de",
+  "symbols": "símbolos",
+  "authErr": "Erro de autorização",
+  "regErr": "Erro de Registo"
+}

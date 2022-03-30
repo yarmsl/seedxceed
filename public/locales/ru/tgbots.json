@@ -1,0 +1,11 @@
+{
+  "launchBot": "Запустить бота",
+  "soon": "Скоро!",
+  "mySalesBot": "Мои продажи [SeedXceed]",
+  "mySalesBotAbout": "Информирует о новых заказах и продажах вашего магазина на Wildberries",
+  "mySalesBotAbout2": "Сообщения приходят раз в полчаса",
+  "grabberWBBot": "Граббер WB [SeedXceed]",
+  "grabberWBBotAbout": "Бот предназначен для выгрузки информации по товарам, брендам и компаниям в сводный Excel файл по ссылке",
+  "raidAlertBot": "Рейд Алерт [SeedXceed]",
+  "raidAlertBotAbout": "Бот для определения блокировок карточек на Wildberries. Узнайте первым о блокировке конкурентов и своих карточек на WB!"
+}

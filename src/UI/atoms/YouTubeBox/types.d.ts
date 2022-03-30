@@ -1,0 +1,3 @@
+interface IYouTubeBoxProps {
+    embedId: string;
+}

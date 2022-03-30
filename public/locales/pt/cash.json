@@ -1,0 +1,18 @@
+{
+  "revenue": "Receita",
+  "total": "Total",
+  "toTransfer": "Para enumerar",
+  "ordered": "Encomendado",
+  "topSellings": "Top Vendas",
+  "paymentStory": "Histórico de pagamentos",
+  "orderNum": "Número de encomenda",
+  "date": "Data",
+  "appoint": "Destino",
+  "price": "Preço",
+  "status": "Статус",
+  "noPay": "Você não fez pagamentos",
+  "confirmed": "Confirmado",
+  "unconfirmed": "Não verificado",
+  "scaner": "Scanner",
+  "restorer": "Restaurador"
+}

@@ -1,0 +1,3 @@
+interface IGeographyTableProps {
+  data: IPieChart[];
+}

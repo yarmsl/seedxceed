@@ -1,0 +1,132 @@
+image: node:16
+
+stages:
+  - build
+  - deploy
+build_dev_br:
+  stage: build
+  script:
+    - echo "Building dev Brasil deploy package"
+    - npm install
+    - npm run build-dev-br
+    - echo "Dev Brasil build successful"
+  artifacts:
+    paths:
+      - ./build_br
+  only:
+    - develop_brasil
+
+build_dev:
+  stage: build
+  script:
+    - echo "Building dev deploy package"
+    - npm install
+    - npm run build-dev
+    - echo "Dev build successful"
+  artifacts:
+    paths:
+      - ./build
+  only:
+    - develop
+
+build_prod_br:
+  stage: build
+  script:
+    - echo "Building prod Brasil deploy package"
+    - npm install
+    - npm run build-br
+    - echo "Prod Brasil build successful"
+  artifacts:
+    paths:
+      - ./build_br
+  only:
+    - main_brasil
+
+build_prod:
+  stage: build
+  script:
+    - echo "Building prod deploy package"
+    - npm install
+    - npm run build
+    - echo "Prod build successful"
+  artifacts:
+    paths:
+      - ./build
+  only:
+    - main
+
+deploy_development:
+  stage: deploy
+  when: on_success
+  script:
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - ssh ubuntu@178.154.202.139 "cd ../../var/www && mkdir build_temp_v2"
+    - scp -r ./build/* ubuntu@178.154.202.139:../../var/www/build_temp_v2
+    - ssh ubuntu@178.154.202.139 "cd ../../var/www && mv devrobotorg.seed-x-ceed.com build_oldV2 && mv build_temp_v2 devrobotorg.seed-x-ceed.com && rm -rf build_oldV2"
+    - ssh ubuntu@178.154.202.139 "cd ../../var/www && cp -r main/ devrobotorg.seed-x-ceed.com/"
+  before_script:
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  environment:
+    name: development
+  only:
+    - develop
+
+deploy_development_brasil:
+  stage: deploy
+  when: on_success
+  script:
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - ssh ubuntu@178.154.202.139 "cd ../../var/www && mkdir -p build_temp_br"
+    - scp -r ./build_br/* ubuntu@178.154.202.139:../../var/www/build_temp_br
+    - ssh ubuntu@178.154.202.139 "cd ../../var/www && mkdir -p bra_robotorg.seed-x-ceed.com && mv bra_robotorg.seed-x-ceed.com build_old_br && mv build_temp_br bra_robotorg.seed-x-ceed.com && rm -rf build_old_br"
+    - ssh ubuntu@178.154.202.139 "cd ../../var/www && cp -r main/ bra_robotorg.seed-x-ceed.com/"
+  before_script:
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  environment:
+    name: development_brasil
+  only:
+    - develop_brasil
+
+deploy_production:
+  stage: deploy
+  when: on_success
+  script:
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - ssh ubuntu@51.250.12.246 "cd ../../var/www && mkdir build_temp"
+    - scp -r ./build/* ubuntu@51.250.12.246:../../var/www/build_temp
+    - ssh ubuntu@51.250.12.246 "cd ../../var/www && mv robotorg.seed-x-ceed.com build_old && mv build_temp robotorg.seed-x-ceed.com && rm -rf build_old"
+    - ssh ubuntu@51.250.12.246 "cd ../../var/www && cp -r main/ robotorg.seed-x-ceed.com/"
+  before_script:
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  environment:
+    name: production
+  only:
+    - main
+
+deploy_production_brasil:
+  stage: deploy
+  when: on_success
+  script:
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - ssh ubuntu@51.250.12.246 "cd ../../var/www && mkdir -p build_temp_br"
+    - scp -r ./build_br/* ubuntu@51.250.12.246:../../var/www/build_temp_br
+    - ssh ubuntu@51.250.12.246 "cd ../../var/www && mkdir -p bra_robotorg.seed-x-ceed.com && mv bra_robotorg.seed-x-ceed.com build_old_br && mv build_temp_br bra_robotorg.seed-x-ceed.com && rm -rf build_old_br"
+    - ssh ubuntu@51.250.12.246 "cd ../../var/www && cp -r main/ bra_robotorg.seed-x-ceed.com/"
+  before_script:
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  environment:
+    name: production
+  only:
+    - main_brasil

@@ -1,0 +1,3 @@
+interface IFavoriteListProps {
+  data: TaskFavorite[];
+}

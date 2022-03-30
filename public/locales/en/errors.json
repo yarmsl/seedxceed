@@ -1,0 +1,23 @@
+{
+  "incorrectEmail": "Incorrect Email",
+  "required": "Required",
+  "wrongPassLogin": "Incorrect E-mail or password",
+  "invalidPhone": "Invalid phone number",
+  "shortPass": "Too short password",
+  "userExists": "Fail, probably user exists",
+  "invalid": "invalid",
+  "incorrect": "incorrect",
+  "incorrectKey": "incorrect key API",
+  "userNotFound": "There is no such user",
+  "enterEmail": "Enter E-mail",
+  "enterPassword": "Enter password",
+  "enterPhone": "Enter phone number",
+  "confirm2Continue": "Confirm to continue",
+  "passMismatch": "Password mismatch",
+  "passContain": "Password must contain letters and numbers",
+  "min": "Minimum",
+  "max": "Maximum",
+  "symbols": "symbols",
+  "authErr": "Authentication error",
+  "regErr": "Registration error"
+}

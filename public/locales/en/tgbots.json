@@ -1,0 +1,11 @@
+{
+  "launchBot": "Launch bot",
+  "soon": "Soon!",
+  "mySalesBot": "My sales [SeedXceed]",
+  "mySalesBotAbout": "Informs about new orders and sales on Wildberries",
+  "mySalesBotAbout2": "Get Messages every half an hour",
+  "grabberWBBot": "Grabber WB [SeedXceed]",
+  "grabberWBBotAbout": "Bot uploads goods information, brands and companies into a summary Excel file by the reference",
+  "raidAlertBot": "Raid Alert [SeedXceed]",
+  "raidAlertBotAbout": "Bot defines blocking cards on Wildberries.  Find out first about competitors blocking and your cards on the WB!"
+}

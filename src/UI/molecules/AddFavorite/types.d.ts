@@ -1,0 +1,3 @@
+interface ISendRequestFavorite {
+  links: string;
+}

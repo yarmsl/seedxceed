@@ -1,0 +1,3 @@
+interface IErrorPageProps {
+  title: string;
+}

@@ -1,0 +1,8 @@
+{
+  "sales": "Sale",
+  "orders": "Order",
+  "returns": "Refund",
+  "cancellation": "Cancellation",
+  "total": "Total",
+  "show": "Show"
+}
