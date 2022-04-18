@@ -4,5 +4,20 @@
   "returns": "Retorna",
   "cancellation": "Cancelamento",
   "total": "Total",
-  "show": "Mostrar"
+  "show": "Mostrar",
+  "dateTime": "Data/Hora",
+  "photo": "Foto",
+  "nameBrand": "Título/Marca",
+  "sum": "Soma",
+  "status": "Status",
+  "new": "Novo",
+  "inAssembly": "Em montagem",
+  "assembled": "Montado",
+  "archived": "Arquivado",
+  "actions": "Ações",
+  "docs": "Documentação",
+  "markSelfRedemption": "Marcar como auto-redenção",
+  "submitAssembly": "Enviar para montagem",
+  "generateBarcode": "Gerar código de barras",
+  "barcode": "Código de barras"
 }

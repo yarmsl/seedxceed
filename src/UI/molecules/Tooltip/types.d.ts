@@ -1,3 +1,3 @@
 interface ITooltipProps {
-  steps: JSX.Element[]
+  steps: JSX.Element[];
 }

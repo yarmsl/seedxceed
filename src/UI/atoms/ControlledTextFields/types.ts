@@ -17,6 +17,8 @@ export type IControlledTextFieldProps = Omit<
   max?: number;
   min?: number;
   changeLinks?: (str: string, value: string) => void;
+  integerWithoutSpace?: boolean;
+  specialOnChange?: () => void;
 };
 
 export type IControlledEmailFieldProps = Omit<

@@ -21,7 +21,7 @@ const ScannerLayout = ({ children }: IMainScannerProps): JSX.Element => {
     },
     top: {
       width: "100%",
-      height: {md: "800px", xs: "1140px"},
+      height: { md: "800px", xs: "1140px" },
       position: "absolute",
       "& svg": {
         width: "100%",
@@ -32,7 +32,7 @@ const ScannerLayout = ({ children }: IMainScannerProps): JSX.Element => {
     },
     footer: {
       width: "100%",
-      height: {md: "610px", xs: "910px"},
+      height: { md: "610px", xs: "910px" },
 
       position: "absolute",
       bottom: "0px",
@@ -41,7 +41,7 @@ const ScannerLayout = ({ children }: IMainScannerProps): JSX.Element => {
         height: "100%",
         objectFit: "cover",
         objectPosition: "center",
-        transform: {xs: "scaleX(-1)"}
+        transform: { xs: "scaleX(-1)" },
       },
     },
   };

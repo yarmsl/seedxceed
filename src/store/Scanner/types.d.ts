@@ -15,7 +15,6 @@ interface IUrlPayRecul extends ISendUrl {
   promo_code: number;
 }
 
-
 interface ISendUrlphone extends ISendUrl {
   phone: string | null;
 }

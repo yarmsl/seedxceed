@@ -35,7 +35,6 @@ const styles: Record<string, SxProps> = {
     p: "6px 10px",
     borderRadius: 1,
     whiteSpace: "nowrap",
-    
   },
   light: {
     bgcolor: "#212946",

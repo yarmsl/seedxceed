@@ -11,7 +11,7 @@ const SelectShopsWithChipList = () => {
   const linkedShops = useAppSelector(linkedShopsWithMpColorAndIconSelector);
 
   const filteredLinkedShops = useMemo(
-    () => linkedShops.filter((ls) => ls.mp === "oz"),
+    () => linkedShops.filter((ls) => ls.mp !== "ml"),
     [linkedShops]
   );
   const { setValue } = useFormContext();

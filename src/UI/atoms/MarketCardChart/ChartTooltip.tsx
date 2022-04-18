@@ -27,9 +27,10 @@ const ChartTooltip = ({ active, payload, label }: IChartTooltipProps) => {
           {date(label || "")}
         </Typography>
         <Divider sx={{ width: "100%" }} />
-        <Typography sx={{ p: "0 5px 3px" }} component="p">{`${t`revenue`}: ${currency(
-          payload[0].payload.op
-        )}`}</Typography>
+        <Typography
+          sx={{ p: "0 5px 3px" }}
+          component="p"
+        >{`${t`revenue`}: ${currency(payload[0].payload.op)}`}</Typography>
       </Box>
     );
   }

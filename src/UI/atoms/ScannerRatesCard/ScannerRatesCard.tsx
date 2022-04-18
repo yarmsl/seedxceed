@@ -65,7 +65,7 @@ const styles: Record<string, SxProps> = {
     borderRadius: 1,
     justifyContent: "center",
     mr: "30px",
-    mb: {xs: "25px"}
+    mb: { xs: "25px" },
   },
   content: {
     flexGrow: 1,
@@ -75,7 +75,7 @@ const styles: Record<string, SxProps> = {
     color: "common.black",
     alignItems: "center",
     fontWeight: "bold",
-    fontSize: {md: "16px", xs: "20px"},
+    fontSize: { md: "16px", xs: "20px" },
     lineHeight: "19px",
   },
   buttons: {

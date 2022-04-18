@@ -24,9 +24,4 @@ const SendMailSlice = createSlice({
   },
 });
 
-
-
-
-
-
 export const { reducer: sendMailReducer } = SendMailSlice;

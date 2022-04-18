@@ -7,13 +7,15 @@ import HelmetTitle from "../../UI/atoms/Helmet";
 import BrandsTable from "../../UI/organisms/SalesDynamics/BrandsTable";
 import TableWeek from "../../UI/organisms/SalesDynamics/TableWeek";
 import AreaChartBrands from "../../UI/organisms/SalesDynamics/AreaChart";
+import { Box, SxProps } from "@mui/material";
 import { IS_DEV } from "configuration/baseUrls";
 import OnReconstructionPage from "UI/atoms/ServicePages/OnReconstructionPage";
 
 export const SalesDynamicsPage = () => {
-  const { calendarSelector, mpSelector, shopSelector } = useAppSelector(
+  const { jhonWeekSelector, mpSelector, shopSelector } = useAppSelector(
     (st) => st.ui
   );
+  const { d, dd } = jhonWeekSelector;
   const isTokensOfMp = useAppSelector(isTokensConsistMp);
   const isConsistense = useCallback(
     (mp: supportedMarketTypes, tokens: string[]) => isTokensOfMp(mp, tokens),
@@ -29,8 +31,8 @@ export const SalesDynamicsPage = () => {
 
   const { data: products, isFetching: isProductsLoading } = useGetProductsQuery(
     {
-      d: calendarSelector.d,
-      dd: calendarSelector.dd,
+      d: "all",
+      dd: 0,
       m: mpSelector[0],
       user_id: shopSelector,
     },
@@ -54,8 +56,8 @@ export const SalesDynamicsPage = () => {
 
   const { data, isFetching } = useGetSalesDynamicsQuery(
     {
-      d: calendarSelector.d,
-      dd: calendarSelector.dd,
+      d,
+      dd,
       nm_id: productIds,
     },
     { skip: skipSalesDynamics }
@@ -70,29 +72,43 @@ export const SalesDynamicsPage = () => {
     [data]
   );
 
+  const graphData = useMemo(
+    () =>
+      Array.isArray(salesDynamicsData.graph) ? salesDynamicsData.graph : [],
+    [salesDynamicsData.graph]
+  );
+
+  const brandsData = useMemo(
+    () =>
+      Array.isArray(salesDynamicsData.brands) ? salesDynamicsData.brands : [],
+    [salesDynamicsData.brands]
+  );
+
   return (
     <>
       <HelmetTitle title="salesDynamics" />
       {IS_DEV ? (
         <>
-          <AreaChartBrands
-            isLoading={isLoading}
-            salesDynamicsData={salesDynamicsData}
-          />
-          <TableWeek
-            isLoading={isLoading}
-            salesDynamicsData={salesDynamicsData}
-          />
-          <BrandsTable
-            isLoading={isLoading}
-            salesDynamicsData={salesDynamicsData}
-          />
+          <Box sx={styles.rootTable}>
+            <AreaChartBrands isLoading={isLoading} graphData={graphData} />
+            <TableWeek isLoading={isLoading} graphData={graphData} />
+          </Box>
+          <BrandsTable isLoading={isLoading} brandsData={brandsData} />
         </>
       ) : (
         <OnReconstructionPage />
       )}
     </>
   );
+};
+
+const styles: Record<string, SxProps> = {
+  rootTable: {
+    bgcolor: "background.default",
+    borderRadius: 1,
+    overflow: "auto",
+    width: "100%",
+  },
 };
 
 export default SalesDynamicsPage;

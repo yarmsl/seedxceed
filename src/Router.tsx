@@ -9,6 +9,7 @@ import { salesPageConf } from "configuration/salesPage.conf";
 import { darkSidePageConf } from "configuration/darkSidePage.conf";
 import { profilePageConf } from "configuration/profilePage.conf";
 import { goodsPageConf } from "configuration/goodsPage.conf";
+import { livePageConf } from "configuration/livePage.conf";
 
 const AuthPage = lazy(() => import("connectedPages/Auth/AuthPage"));
 const RegPage = lazy(() => import("connectedPages/Auth/RegPage"));
@@ -35,14 +36,16 @@ const AutorestorerPage = lazy(
 );
 const Scanner = lazy(() => import("connectedPages/Scanner/Scanner"));
 const ComplaintsPage = lazy(() => import("connectedPages/DarkSide/Complaints"));
-const FavoritePage = lazy(() => import("connectedPages/DarkSide/Favorite"))
+const FavoritePage = lazy(() => import("connectedPages/DarkSide/Favorite"));
+const BasketPage = lazy(() => import("connectedPages/DarkSide/Basket"));
 const ConnectMarketPage = lazy(
   () => import("connectedPages/ConnectMarket/ConnectMarketPage")
 );
 const ProfilePage = lazy(() => import("connectedPages/Profile/Profile"));
 const PaymentsPage = lazy(() => import("connectedPages/Profile/Payments"));
 const SecurityPage = lazy(() => import("connectedPages/Profile/Security"));
-const LivePage = lazy(() => import("connectedPages/Live/LivePage"));
+const TimelinePage = lazy(() => import("connectedPages/Live/TimelinePage"));
+const OrdersPage = lazy(() => import("connectedPages/Live/OrdersPage"));
 
 interface IRouterProps {
   isAuth: boolean;
@@ -104,7 +107,12 @@ const Router = ({ isAuth, isCheckedAuth, role }: IRouterProps): JSX.Element => {
           <Route path="autorestorer" element={<AutorestorerPage />} />
           <Route path="telegram_bots" element={<TelegramBotsPage />} />
           <Route path="mp_connect" element={<ConnectMarketPage />} />
-          <Route path="live" element={<LivePage />} />
+          <Route path="live" element={<TabsLayout pageConf={livePageConf} />}>
+            <Route path="timeline" element={<TimelinePage />} />
+            <Route path="orders" element={<OrdersPage />} />
+            <Route path="" element={<Navigate to="timeline" />} />
+            <Route path="*" element={<Navigate to="timeline" />} />
+          </Route>
           {role === "admin" && (
             <Route
               path="darkside"
@@ -112,6 +120,7 @@ const Router = ({ isAuth, isCheckedAuth, role }: IRouterProps): JSX.Element => {
             >
               <Route path="complaints" element={<ComplaintsPage />} />
               <Route path="favorite" element={<FavoritePage />} />
+              <Route path="basket" element={<BasketPage />} />
               <Route path="" element={<Navigate to="complaints" />} />
               <Route path="*" element={<Navigate to="complaints" />} />
             </Route>

@@ -3,17 +3,31 @@ import {
   ListItemIcon,
   ListItemText,
   SxProps,
+  Box,
 } from "@mui/material";
 import { memo, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "store";
-import { ReactComponent as NotifIcon } from "../../../assets/icons/notification.svg";
+import { keyframes } from "@emotion/react";
 
 const NotifButton = () => {
   const nav = useNavigate();
   const loc = useLocation();
   const isSelected = useMemo(() => loc.pathname === "/live", [loc]);
   const { darkMode } = useAppSelector((st) => st.ui);
+
+  const rec = keyframes`
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+  
+`;
 
   return (
     <ListItemButton
@@ -22,10 +36,26 @@ const NotifButton = () => {
       sx={darkMode ? dark : light}
       disableGutters
     >
-      <ListItemIcon sx={styles.icon}>
-        <NotifIcon />
+      <ListItemIcon>
+        <Box sx={styles.recConteiner}>
+          <Box
+            sx={{
+              width: "14px",
+              height: "14px",
+              backgroundColor: "red",
+              animation: `${rec} 1.5s infinite`,
+              p: 0,
+              display: "block",
+              ml: "auto",
+              mr: "auto",
+              borderRadius: "50%",
+              opacity: 1,
+              transition: "opacity, 1s, ease-out",
+            }}
+          ></Box>
+        </Box>
       </ListItemIcon>
-      <ListItemText>Live</ListItemText>
+      <ListItemText>LIVE</ListItemText>
     </ListItemButton>
   );
 };
@@ -38,34 +68,14 @@ const styles: Record<string, SxProps> = {
     whiteSpace: "nowrap",
     color: "text.secondary",
   },
-  light: {
-    bgcolor: "#FFE57F",
-    "&.Mui-selected": {
-      bgcolor: "#FFE57F",
-      outline: "2px solid #FFC107",
-      "&:hover": {
-        bgcolor: "#ffdb4d",
-      },
-    },
-    "&:hover": {
-      bgcolor: "#ffdb4d",
-    },
-  },
-  dark: {
-    bgcolor: "#b8860b",
-    "&.Mui-selected": {
-      bgcolor: "#b8860b",
-      outline: "2px solid #945d0b",
-      "&:hover": {
-        bgcolor: "#876308",
-      },
-    },
-    "&:hover": {
-      bgcolor: "#876308",
-    },
-  },
-  icon: {
-    color: "#FFC107",
+
+  recConteiner: {
+    width: "24px",
+    height: "24px",
+    border: "solid #757575 1px",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
   },
 };
 

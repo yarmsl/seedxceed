@@ -1,10 +1,10 @@
-import {memo} from 'react';
-import {PasswordField} from "../../atoms/ControlledTextFields"
-import {FormProvider, useForm} from "react-hook-form"
-import {useTranslation} from "react-i18next"
-import {useDispatch} from "react-redux"
-import {Box, SxProps, Button} from "@mui/material"
-import {changePasswordUser} from "../../../store/User/User.actions"
+import { memo } from "react";
+import { PasswordField } from "../../atoms/ControlledTextFields";
+import { FormProvider, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { Box, SxProps, Button } from "@mui/material";
+import { changePasswordUser } from "../../../store/User/User.actions";
 
 interface IFormValues {
   old_password: string;
@@ -17,17 +17,17 @@ const Safety = (): JSX.Element => {
     defaultValues: {
       old_password: "",
       new_password: "",
-      repeat_new_password: ""
-    }
-  })
-  const {t} = useTranslation(["common", "profile"])
-  const dispatch = useDispatch()
+      repeat_new_password: "",
+    },
+  });
+  const { t } = useTranslation(["common", "profile"]);
+  const dispatch = useDispatch();
 
   const changePassword = (data: IFormValues) => {
-    const {new_password, old_password} = data
-    dispatch(changePasswordUser({new_password, old_password}))
-    methods.reset()
-  }
+    const { new_password, old_password } = data;
+    dispatch(changePasswordUser({ new_password, old_password }));
+    methods.reset();
+  };
 
   return (
     <>
@@ -55,7 +55,7 @@ const Safety = (): JSX.Element => {
             />
           </Box>
           <Button
-            type='submit'
+            type="submit"
             variant="contained"
             sx={styles.btnSave}
           >{t`profile:save`}</Button>
@@ -70,13 +70,13 @@ const styles: Record<string, SxProps> = {
     width: {
       xs: "100%",
       sm: "100%",
-      md: "auto"
+      md: "auto",
     },
     mb: "25px",
     "& input": {
       fontWeight: 500,
-      color: "common.black"
-    }
+      color: "common.black",
+    },
   },
   newPassWrap: {
     display: "flex",
@@ -84,31 +84,31 @@ const styles: Record<string, SxProps> = {
     flexDirection: {
       xs: "column",
       sm: "column",
-      md: "row"
+      md: "row",
     },
-    mb: "25px"
+    mb: "25px",
   },
   newPassInput: {
     width: {
       sm: "100%",
-      md: "calc(50% - 12px)"
+      md: "calc(50% - 12px)",
     },
     mb: {
       xs: "10px",
       sm: "10px",
-      md: "0"
+      md: "0",
     },
     "& input": {
       fontWeight: 500,
-      color: "common.black"
-    }
+      color: "common.black",
+    },
   },
   btnSave: {
     position: "relative",
     left: "100%",
     transform: "translateX(-100%)",
-    p: "12px 16px"
-  }
-}
+    p: "12px 16px",
+  },
+};
 
 export default memo(Safety);

@@ -4,5 +4,20 @@
   "returns": "Refund",
   "cancellation": "Cancellation",
   "total": "Total",
-  "show": "Show"
+  "show": "Show",
+  "dateTime": "Date/Time",
+  "photo": "Photo",
+  "nameBrand": "Title/Brand",
+  "sum": "Total",
+  "status": "Status",
+  "new": "New",
+  "inAssembly": " In Assembly",
+  "assembled": "Assembled",
+  "archived": "Archived",
+  "actions": "Actions",
+  "docs": "Documents",
+  "markSelfRedemption": "Mark as self redemption",
+  "submitAssembly": "Submit assembly",
+  "generateBarcode": "Generate barcode",
+  "barcode": "Barcode"
 }

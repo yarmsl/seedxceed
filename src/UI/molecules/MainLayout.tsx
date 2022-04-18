@@ -51,6 +51,7 @@ const MainLayout = (): JSX.Element => {
   }, [count, dispatch, isDayPassed]);
 
   const { isPortable } = useMedia();
+
   return (
     <Container sx={styles.wrapper} disableGutters maxWidth={false}>
       <Header />

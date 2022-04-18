@@ -1,5 +1,5 @@
 export const profilePageConf = [
-  {title: "profile", path: "user"},
-  {title: "payments", path: "payments"},
-  {title: "safty", path: "security"}
-]
+  { title: "profile", path: "user" },
+  { title: "payments", path: "payments" },
+  { title: "safty", path: "security" },
+];

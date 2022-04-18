@@ -13,7 +13,7 @@ const Scanner = () => {
   return (
     <>
       <Helmet title="roboScanner" />
-      <ScannerLayout >
+      <ScannerLayout>
         <ScannerPageHeader />
         <ScannerPageCard />
         <ScannerCardUpdate />

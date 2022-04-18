@@ -5,7 +5,6 @@ import WhackMenuItem from "./WhackMenuItem";
 import { LANG } from "configuration/baseUrls";
 
 const MainMenuList = ({ items }: IMainMenuListProps): JSX.Element => {
-
   return (
     <List>
       {items.map((item) => (

@@ -49,22 +49,20 @@ const styles: Record<string, SxProps> = {
   title: {
     p: "8px 0",
     color: "common.black",
-    fontSize: {xs: "23px", md: "16px"},
-    fontWeight: {xs: 500}
+    fontSize: { xs: "23px", md: "16px" },
+    fontWeight: { xs: 500 },
   },
   icons: {
     paddingTop: "32px",
     "& img": {
-      width: { xs: "70px", md: "60px" }
-    }
-
+      width: { xs: "70px", md: "60px" },
+    },
   },
   about: {
     color: "#9E9E9E",
-    fontSize: {md: "14px", xs: "18px"},
+    fontSize: { md: "14px", xs: "18px" },
     lineHeight: "16px",
     fontWeight: "bold",
-
   },
 };
 

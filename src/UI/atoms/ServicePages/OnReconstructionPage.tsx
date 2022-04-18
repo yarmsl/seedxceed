@@ -15,7 +15,7 @@ const OnReconstructionPage = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        overflow: 'hidden',
+        overflow: "hidden",
         "& svg": {
           height: "350px",
           objectFit: "contain",

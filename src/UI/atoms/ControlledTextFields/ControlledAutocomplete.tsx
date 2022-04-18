@@ -22,7 +22,13 @@ const MegaAutocomplete = <
     <Controller
       name={name}
       control={control}
-      defaultValue={rest.defaultValue != null ? rest.defaultValue : rest.multiple ? [] : null}
+      defaultValue={
+        rest.defaultValue != null
+          ? rest.defaultValue
+          : rest.multiple
+          ? []
+          : null
+      }
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <Autocomplete
           value={value}

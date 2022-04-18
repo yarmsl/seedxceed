@@ -66,7 +66,7 @@ const CalendarSelector: FC<ICalendarSelectorProps> = ({ isPortable }) => {
 
   return (
     <>
-      <Box sx={tsType === null ? hide : styles.root}>
+      <Box sx={tsType === "period" ? styles.root : hide}>
         <TextField
           autoComplete="off"
           size="small"
@@ -208,6 +208,8 @@ const stylesByMode = (darkMode: boolean): Record<string, SxProps> => ({
       },
     },
     "& .rdrDayNumber": {
+      top: "0px",
+      bottom: "0px",
       "& span": {
         color: "text.secondary",
       },
@@ -217,6 +219,101 @@ const stylesByMode = (darkMode: boolean): Record<string, SxProps> => ({
     },
     "& .rdrDayDisabled": {
       bgcolor: darkMode ? "grey.900" : "grey.100",
+    },
+    "& .rdrDayToday .rdrDayNumber span": {
+      "&:after": {
+        bottom: "10px",
+      },
+    },
+
+    "& .rdrMonth": {
+      width: "300px !important",
+    },
+    "& .rdrDay": {
+      width: "40px !important",
+      height: "40px !important",
+    },
+    "& .rdrSelected, .rdrInRange, .rdrStartEdge, .rdrEndEdge": {
+      top: "3px",
+      bottom: "3px",
+    },
+    "& .rdrDayHovered": {
+      borderRadius: "50%",
+    },
+    "& .rdrInRange": {
+      backgroundColor: "#2196F3",
+    },
+    "& .rdrEndEdge": {
+      backgroundColor: "#2196F3",
+      right: "3px",
+      borderTopRightRadius: "50% !important",
+      borderBottomRightRadius: "50% !important",
+    },
+    "& .rdrStartEdge": {
+      backgroundColor: "#2196F3",
+      borderTopLeftRadius: "50% !important",
+      borderBottomLeftRadius: "50% !important",
+      left: "3px",
+    },
+    "& .rdrDayInPreview": {
+      borderTop: "1px solid #2196F3",
+      borderBottom: "1px solid #2196F3",
+    },
+    "& .rdrDayStartPreview": {
+      borderTopLeftRadius: "50% !important",
+      borderBottomLeftRadius: "50% !important",
+      left: "3px",
+      borderLeft: "1px solid #2196F3",
+      borderTop: "1px solid #2196F3",
+      borderBottom: "1px solid #2196F3",
+    },
+
+    "& .rdrDayEndPreview": {
+      borderTopRightRadius: "50% !important",
+      borderBottomRightRadius: "50% !important",
+      right: "3px",
+      borderRight: " 1px solid #2196F3",
+      borderTop: "1px solid #2196F3",
+      borderBottom: "1px solid #2196F3",
+    },
+    "& .rdrDayStartPreview,.rdrDayInPreview, .rdrDayEndPreview": {
+      top: "3px !important",
+      bottom: "3px !important",
+    },
+
+    "& .rdrDayEndOfMonth, .rdrDayEndOfWeek": {
+      "& .rdrDayInPreview, .rdrDayStartPreview": {
+        right: "3px !important",
+        borderTop: "1px solid #2196F3",
+        borderBottom: "1px solid #2196F3",
+        borderRight: "1px solid #2196F3",
+        borderLeft: "1px solid #2196F3",
+      },
+
+      "& .rdrDayStartPreview": {
+        left: "3px !important",
+      },
+      "& .rdrInRange, .rdrStartEdge": {
+        borderTopRightRadius: "50% !important",
+        borderBottomRightRadius: "50% !important",
+        right: "3px",
+      },
+    },
+    "& .rdrDayStartOfMonth, .rdrDayStartOfWeek": {
+      "& .rdrInRange, .rdrEndEdge": {
+        borderTopLeftRadius: "50% !important",
+        borderBottomLeftRadius: "50% !important",
+        left: "3px",
+      },
+      "& .rdrDayInPreview, .rdrDayEndPreview": {
+        left: "3px",
+        borderTop: "1px solid #2196F3",
+        borderBottom: "1px solid #2196F3",
+        borderLeft: "1px solid #2196F3",
+      },
+      "& .rdrDayEndPreview": {
+        borderRight: "1px solid #2196F3",
+      },
     },
   },
 });

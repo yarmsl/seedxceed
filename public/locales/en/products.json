@@ -122,5 +122,7 @@
   "loadGoogs": "Goods are loaded",
   "quantityPcs": "Quantity, pcs",
   "ordersPcs": "Orders, pcs",
-  "salesPcs": "Sales, pcs"
+  "salesPcs": "Sales, pcs",
+  "failData": "No data for the selected period"
+
 }

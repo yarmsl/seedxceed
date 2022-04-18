@@ -1,4 +1,4 @@
-import { lazy, memo, Suspense } from "react";
+import { lazy, memo, Suspense, useMemo } from "react";
 import {
   AppBar,
   Box,
@@ -14,31 +14,33 @@ import { toggleBurgerMenu } from "store/UI";
 import Breadcrumb from "UI/atoms/Breadcrumbs/Breadcrumb";
 import { isAtLeastOneLinkedShop } from "store/Dashboard";
 import AddStoreButton from "UI/atoms/AddStoreButton/AddStoreButton";
-import { IS_DEV } from "configuration/baseUrls";
+import { useScroll } from "lib/useScroll";
 
-const TimeStampSelector = lazy(
-  () => import("UI/atoms/TimeStampSelector/TimeStampSelector")
-);
 const MarketPlacesSelector = lazy(
   () => import("UI/atoms/MarketPlacesSelector/MarketPlacesSelector")
 );
 const ShopsSelectors = lazy(
   () => import("UI/atoms/ShopsSelector/ShopsSelectors")
 );
-const LiveTypesSelector = lazy(
-  () => import("UI/atoms/LiveTypesSelector/LiveTypesSelector")
-);
 const CalendarSelector = lazy(
   () => import("UI/atoms/TimeStampSelector/CalendarSelector")
+);
+const WeekSelector = lazy(
+  () => import("UI/atoms/TimeStampSelector/WeekSelector")
 );
 
 const Header = () => {
   const dispatch = useDispatch();
   const { isPortable } = useMedia();
   const isLinkedMPs = useSelector(isAtLeastOneLinkedShop);
+  const isScrollTop = useScroll();
+  const headerStyle = useMemo(
+    () => (isScrollTop ? styles.root : headerWithShadow),
+    [isScrollTop]
+  );
 
   return (
-    <AppBar color="transparent" sx={styles.root}>
+    <AppBar color="transparent" sx={headerStyle}>
       <Toolbar disableGutters sx={styles.header}>
         <Box sx={styles.start}>
           {isPortable && (
@@ -51,14 +53,10 @@ const Header = () => {
         <Box sx={styles.controls}>
           {isLinkedMPs && (
             <Suspense fallback={<CircularProgress size={20} color="primary" />}>
-              {IS_DEV ? (
-                <CalendarSelector isPortable={isPortable} />
-              ) : (
-                <TimeStampSelector isPortable={isPortable} />
-              )}
+              <CalendarSelector isPortable={isPortable} />
+              <WeekSelector isPortable={isPortable} />
               <MarketPlacesSelector isPortable={isPortable} />
               <ShopsSelectors isPortable={isPortable} />
-              <LiveTypesSelector isPortable={isPortable} />
             </Suspense>
           )}
           <AddStoreButton isPortable={isPortable} />
@@ -74,6 +72,7 @@ const styles: Record<string, SxProps> = {
     boxShadow: "none",
     bgcolor: "background.default",
     minHeight: "64px",
+    transition: "box-shadow 250ms ease-in-out",
   },
   header: {
     display: "flex",
@@ -101,6 +100,11 @@ const styles: Record<string, SxProps> = {
     top: "100%",
     right: "0px",
   },
+  shadow: {
+    boxShadow: "0px 4px 4px rgba(0,0,0,0.2)",
+  },
 };
+
+const headerWithShadow = { ...styles.root, ...styles.shadow };
 
 export default memo(Header);

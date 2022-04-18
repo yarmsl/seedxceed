@@ -62,7 +62,8 @@ const OzonField = ({
             multiline={type === "multiline"}
             minRows={3}
             maxRows={10}
-            type={typeR}
+            type={typeR === "number" ? "text" : typeR}
+            integer={typeR === "number"}
             fullWidth
           />
         ) : multiple ? (

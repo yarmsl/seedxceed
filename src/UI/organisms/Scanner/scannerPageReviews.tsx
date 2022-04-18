@@ -61,13 +61,13 @@ const styles: Record<string, SxProps> = {
     lineHeight: "28px",
   },
   arrow: {
-    fontSize: {xs: "65px", sm: "96px"},
+    fontSize: { xs: "65px", sm: "96px" },
     color: "common.black",
     textAlign: "left",
     lineHeight: " 30px",
   },
   arrow2: {
-    fontSize: {xs: "65px", sm: "96px"},
+    fontSize: { xs: "65px", sm: "96px" },
     textAlign: "end",
     color: "common.black",
     lineHeight: "40px",

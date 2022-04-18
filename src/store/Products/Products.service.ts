@@ -31,6 +31,14 @@ export const productAPI = createApi({
       }),
       transformResponse: (data: IGetCategoryOzRes) => data?.response || [],
     }),
+    getCategoriesYm: build.query<IGetCategoryYmTransformedRes[], number>({
+      query: (id) => ({
+        url: `/getCategories/ym/?id=${id}`,
+        method: "GET",
+      }),
+      transformResponse: (data: IGetCategoryYmRes[]) =>
+        data?.map((d) => ({ title: d.title, id: d.id })) || [],
+    }),
     getAllFieldsByCategoryWb: build.query<
       IFieldsWbRes[],
       IGetAllFieldsByCategoryReq
@@ -112,16 +120,13 @@ export const productAPI = createApi({
         body: request,
       }),
     }),
-    // postProductCardYm: build.mutation<
-    //   IPostProductCardYmRes,
-    //   FormData
-    // >({
-    //   query: (request) => ({
-    //     url: "/createProduct",
-    //     method: "POST",
-    //     body: request,
-    //   }),
-    // }),
+    postProductCardYm: build.mutation<IPostProductCardYmRes, FormData>({
+      query: (request) => ({
+        url: "/createProduct",
+        method: "POST",
+        body: request,
+      }),
+    }),
     getProducts: build.query<IProduct[], IApiReq>({
       query: (request) => ({
         url: "/getProducts",
@@ -129,7 +134,7 @@ export const productAPI = createApi({
         body: request,
       }),
       transformResponse: (data: IGetProductsRes) =>
-        data.response.products || [],
+        data.response?.products || [],
     }),
     getProductById: build.query<
       IProductFullTransformRes,
@@ -149,6 +154,7 @@ export const productAPI = createApi({
 export const {
   useLazyGetCategoriesWbQuery,
   useGetCategoriesOzQuery,
+  useGetCategoriesYmQuery,
   useLazyGetAllFieldsByCategoryWbQuery,
   useLazyGetAllFieldsByCategoryOzQuery,
   useGetAttributeSpecsOzQuery,
@@ -157,7 +163,7 @@ export const {
   // useLazyGetPostedCardQuery,
   usePostProductCardWbMutation,
   usePostProductCardOzMutation,
-  // usePostProductCardYmMutation,
+  usePostProductCardYmMutation,
   useGetProductsQuery,
   useGetProductByIdQuery,
 } = productAPI;

@@ -48,7 +48,7 @@ export const createPaymentThunkAction = createAsyncThunk<
 });
 
 export const reculatePaymentThunkAction = createAsyncThunk<
-IUrlPayRecul,
+  IUrlPayRecul,
   IPayMentRecal,
   {
     state: TRootState;
@@ -67,8 +67,6 @@ IUrlPayRecul,
     throw new Error(err);
   }
 });
-
-
 
 export const createSupportThunkAction = createAsyncThunk<
   ISendMailRes,

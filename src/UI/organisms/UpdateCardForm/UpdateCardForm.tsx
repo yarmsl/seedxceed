@@ -36,7 +36,7 @@ export const UpdateCardForm = ({
   shopTitle,
   phone,
   companyTitle,
-  id
+  id,
 }: IProps) => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["apiConnection", "auth", "common"]);
@@ -64,7 +64,7 @@ export const UpdateCardForm = ({
           company_title,
           shop_title,
           phone,
-          id
+          id,
         }).unwrap();
         dispatch(showSuccessSnackbar(`Shop updated`));
         dispatch(closeModalAction());
@@ -81,7 +81,7 @@ export const UpdateCardForm = ({
       shop_title: shopTitle,
       phone: phone,
     });
-  }, [ companyTitle, phone, reset, shopTitle]);
+  }, [companyTitle, phone, reset, shopTitle]);
 
   return (
     <>

@@ -17,9 +17,15 @@ import { DashboardReducer } from "./Dashboard";
 import { PaymentScannerReducer } from "./Scanner/Payment.reducer";
 import { productAPI, ProductsReducer } from "./Products";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { complaintsAPI, FavoriteAPI } from "./DarkSide/DarkSide.service";
+import {
+  complaintsAPI,
+  FavoriteAPI,
+  BasketAPI,
+} from "./DarkSide/DarkSide.service";
 import { salesAPI } from "./Sales";
-import { liveAPI } from "./Live";
+import { liveAPI, LiveReducer } from "./Live";
+
+// import { TokenMiddleware } from "./Auth/Auth.middleware";
 
 const UIPersistConfig = {
   key: "ui",
@@ -28,6 +34,7 @@ const UIPersistConfig = {
     "locale",
     "darkMode",
     "langType",
+    "jhonWeekSelector",
     "calendarSelector",
     "mpSelector",
     "shopSelector",
@@ -47,11 +54,13 @@ const rootReducer = combineReducers({
   modalStack: ModalStackReducer,
   ui: persistReducer(UIPersistConfig, UIReducer),
   products: ProductsReducer,
+  live: LiveReducer,
   [dashboardAPI.reducerPath]: dashboardAPI.reducer,
   [authAPI.reducerPath]: authAPI.reducer,
   [productAPI.reducerPath]: productAPI.reducer,
   [complaintsAPI.reducerPath]: complaintsAPI.reducer,
   [FavoriteAPI.reducerPath]: FavoriteAPI.reducer,
+  [BasketAPI.reducerPath]: BasketAPI.reducer,
   [salesAPI.reducerPath]: salesAPI.reducer,
   [liveAPI.reducerPath]: liveAPI.reducer,
 });
@@ -60,11 +69,13 @@ const appStore = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(
+      // TokenMiddleware,
       dashboardAPI.middleware,
       authAPI.middleware,
       productAPI.middleware,
       complaintsAPI.middleware,
       FavoriteAPI.middleware,
+      BasketAPI.middleware,
       salesAPI.middleware,
       liveAPI.middleware
     ),

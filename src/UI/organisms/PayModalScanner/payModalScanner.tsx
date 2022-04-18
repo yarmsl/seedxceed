@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { closeModalAction, openModal } from "../../../store/ModalStack";
 import { useForm, FormProvider } from "react-hook-form";
 import {
@@ -49,13 +49,22 @@ export const PayModalScanner = ({ index }: IProps) => {
     defaultValues: {
       type: "scaner",
       region: "RU",
-      number_card: 1,
+      number_card: index === 1 ? 1 : 10,
       promocode: "",
     },
   });
-  const { handleSubmit, watch, reset } = methods;
+  const { handleSubmit, watch, setValue } = methods;
 
-  const changeSum = watch("number_card");
+  const changeSumWatch = watch("number_card");
+
+  const changeSum =
+    index === 1
+      ? +changeSumWatch === 0
+        ? 1
+        : +changeSumWatch
+      : +changeSumWatch === 0
+      ? 10
+      : +changeSumWatch;
 
   const totalPrice = promo_price !== 0 ? promo_price : +changeSum * rates_price;
 
@@ -73,13 +82,13 @@ export const PayModalScanner = ({ index }: IProps) => {
           promo_price,
         }).unwrap();
         setPromo_price(res.promo_price);
-        reset();
+        setValue("promocode", " ");
         dispatch(showSuccessSnackbar(t`scanner:promocodeSuccess`));
       } catch (e) {
         dispatch(showErrorSnackbar(t`scanner:promocodeFalied`));
       }
     },
-    [createPromo, dispatch, promo_price, reset, t, totalPrice]
+    [createPromo, dispatch, promo_price, setValue, t, totalPrice]
   );
 
   const pay = useCallback(
@@ -95,16 +104,6 @@ export const PayModalScanner = ({ index }: IProps) => {
     },
     [dispatch, totalPrice]
   );
-
-  useEffect(() => {
-    const input = document.getElementById("promoInput");
-    input?.addEventListener("keyup", function (event) {
-      if (event.code === "Enter" || event.code === "NumpadEnter") {
-        event.preventDefault();
-        document?.getElementById("promoBtn")?.click();
-      }
-    });
-  }, []);
 
   return (
     <>
@@ -151,10 +150,7 @@ export const PayModalScanner = ({ index }: IProps) => {
                   size="small"
                   min={index === 1 ? 1 : 10}
                   max={index === 1 ? 10 : 50}
-                  type="number"
-                  InputProps={{
-                    inputProps: { min: 1 },
-                  }}
+                  integerWithoutSpace
                 />
               </Box>
               <Box

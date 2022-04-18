@@ -1,6 +1,4 @@
 import { Box } from "@mui/material";
-import { IS_DEV } from "configuration/baseUrls";
-import { ddCrutch } from "lib/helpers";
 import { memo, useCallback, useMemo } from "react";
 import { useAppSelector } from "store";
 import { isTokensConsistMp } from "store/Dashboard";
@@ -12,8 +10,10 @@ import SalesTable from "UI/molecules/SalesTable/SalesTable";
 import HelmetTitle from "../../UI/atoms/Helmet";
 
 const SalesPage = () => {
-  const { calendarSelector, mpSelector, shopSelector, timeStampSelector } =
-    useAppSelector((st) => st.ui);
+  const { calendarSelector, mpSelector, shopSelector } = useAppSelector(
+    (st) => st.ui
+  );
+  const { d, dd } = calendarSelector;
   const isTokensOfMp = useAppSelector(isTokensConsistMp);
   const isConsistense = useCallback(
     (mp: supportedMarketTypes, tokens: string[]) => isTokensOfMp(mp, tokens),
@@ -29,8 +29,8 @@ const SalesPage = () => {
 
   const { data, isFetching } = useGetSalesQuery(
     {
-      d: IS_DEV ? calendarSelector.d : timeStampSelector,
-      dd: IS_DEV ? calendarSelector.dd : ddCrutch(timeStampSelector),
+      d,
+      dd,
       m: mpSelector[0],
       user_id: shopSelector,
     },

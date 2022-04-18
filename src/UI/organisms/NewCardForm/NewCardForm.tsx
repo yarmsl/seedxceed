@@ -1,17 +1,20 @@
 import { Box, Button, CircularProgress, SxProps } from "@mui/material";
-import { useCallback } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "store";
 import { showErrorSnackbar, showSuccessSnackbar } from "store/Notifications";
-import { usePostProductCardOzMutation } from "store/Products";
+import {
+  usePostProductCardOzMutation,
+  usePostProductCardYmMutation,
+} from "store/Products";
 import CommonFields from "UI/molecules/CommonFields/CommonFields";
 import NewCardFilesUpload from "UI/molecules/NewCardFilesUpload/NewCardFilesUpload";
 import SelectShopsWithChipList from "UI/molecules/SelectShopsWithChipList/SelectShopsWithChipList";
 import OzonSpecialFields from "UI/molecules/SpecialFields/OzonSpecialFields";
 import { ozAttributes } from "./attributes.transform";
-// import WildberriesSpecialFields from "UI/molecules/SpecialFields/WildberriesSpecialFields";
-// import YandexSpecialFields from "UI/molecules/SpecialFields/YandexSpecialFields";
+import WildberriesSpecialFields from "UI/molecules/SpecialFields/WildberriesSpecialFields";
+import YandexSpecialFields from "UI/molecules/SpecialFields/YandexSpecialFields";
 
 const NewCardForm = () => {
   const dispatch = useAppDispatch();
@@ -24,7 +27,13 @@ const NewCardForm = () => {
   const [sendNewCardOz, { isLoading: isOzLoading }] =
     usePostProductCardOzMutation();
 
-  const isLoading = isOzLoading;
+  const [sendNewCardYm, { isLoading: isYmLoading }] =
+    usePostProductCardYmMutation();
+
+  const isLoading = useMemo(
+    () => isOzLoading || isYmLoading,
+    [isOzLoading, isYmLoading]
+  );
 
   const methods = useForm<INewCardFormFields>({
     defaultValues: {
@@ -32,6 +41,7 @@ const NewCardForm = () => {
       brand: "",
       country: "",
       depth: "",
+      description: "",
       height: "",
       old_price: "",
       premium_price: "",
@@ -42,17 +52,24 @@ const NewCardForm = () => {
       price: "",
       oz_category: null,
       wb_category: null,
+      ym_category: [],
       images: [],
       videos: [],
-      stereos: [],
+      // stereos: [],
       vat: "0.2",
       oz: undefined,
+      ym: undefined,
+      certificate: "",
+      vendor: "",
+      vendorCode: "",
+      boxCount: "",
     },
   });
   const { handleSubmit, watch } = methods;
 
   const sendForm = useCallback(
     async (data: INewCardFormFields) => {
+      // console.log(data);
       if (data.oz && data.oz_category) {
         const ozData: IPostProductCardOzReqData = {
           barcode: data.barcode,
@@ -92,8 +109,46 @@ const NewCardForm = () => {
           );
         }
       }
+      if (data.ym_category && data.ym) {
+        const ymData: IPostProductCardYmReq = {
+          shopSku: data.barcode,
+          name: data.title,
+          category: data.ym_category?.filter((d) => d !== "").join("/") || "",
+          manufacturerCountries: data.country ? [data.country] : ["Россия"],
+          pictures: [],
+          price: data.price.replace(/[^0-9]/g, ""),
+          description: data.description,
+          certificate: data.certificate,
+          boxCount:
+            data != null && data.boxCount != null
+              ? +data.boxCount.replace(/[^0-9]/g, "")
+              : undefined,
+          vendor: data.vendor,
+          vendorCode: data.vendorCode,
+        };
+        const ymSendData = new FormData();
+        ymSendData.append(
+          "user_id",
+          JSON.stringify(tokensByMp(data.shops, "ym"))
+        );
+        ymSendData.append("m", "ym");
+        ymSendData.append("data", JSON.stringify(ymData));
+        data.images.forEach((img) => ymSendData.append("images", img));
+        data.videos.forEach((video) => ymSendData.append("videos", video));
+        // console.log(ymData);
+        try {
+          const res = await sendNewCardYm(ymSendData).unwrap();
+          dispatch(showSuccessSnackbar(res.message));
+        } catch (e) {
+          dispatch(
+            showErrorSnackbar(
+              `Ошибка отправки карточки Yandex ${JSON.stringify(e)}`
+            )
+          );
+        }
+      }
     },
-    [dispatch, sendNewCardOz, tokensByMp]
+    [dispatch, sendNewCardOz, sendNewCardYm, tokensByMp]
   );
 
   const isMp = useCallback(
@@ -111,8 +166,8 @@ const NewCardForm = () => {
         <CommonFields />
         <Box sx={styles.fields}>
           {isMp("oz") && <OzonSpecialFields />}
-          {/* {isMp("wb") && <WildberriesSpecialFields />} */}
-          {/* {isMp("ym") && <YandexSpecialFields />} */}
+          {isMp("wb") && <WildberriesSpecialFields />}
+          {isMp("ym") && <YandexSpecialFields />}
         </Box>
         <NewCardFilesUpload />
         <Button
@@ -146,6 +201,7 @@ const styles: Record<string, SxProps> = {
     width: "100%",
     display: "flex",
     flexWrap: "wrap",
+    alignItems: "flex-start",
     alignContent: "flex-start",
     mb: "0px!important",
     "&>*": {
@@ -158,4 +214,4 @@ const styles: Record<string, SxProps> = {
   },
 };
 
-export default NewCardForm;
+export default memo(NewCardForm);

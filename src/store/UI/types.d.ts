@@ -3,11 +3,11 @@ interface UIState {
   darkMode: boolean;
   locale: string;
   langType: "ru" | "pt";
+  jhonWeekSelector: ICalendarSelectorNew;
   calendarSelector: ICalendarSelector;
   timeStampSelector: timeStampTypes;
   shopSelector: string[];
   mpSelector: supportedMarketTypes[];
-  liveTypesSelector: LiveNotifTypes[];
   exchangeRate: number;
   warningWindow: { count: number; timestamp: Date };
 }
@@ -15,6 +15,11 @@ interface UIState {
 interface ICalendarSelector {
   d: timeStampTypes;
   dd: number;
+}
+
+interface ICalendarSelectorNew {
+  d: Date;
+  dd: Date;
 }
 interface IExchangeRateReq {
   lang: string;

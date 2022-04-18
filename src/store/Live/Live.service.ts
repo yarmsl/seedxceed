@@ -15,7 +15,7 @@ export const liveAPI = createApi({
   refetchOnReconnect: true,
   tagTypes: ["Live"],
   endpoints: (build) => ({
-    getLive: build.query<ITransformedLiveRes[], IGetLiveReq>({
+    getLive: build.query<IGetLiveResTransformed[], IGetLiveReq>({
       query: (request) => ({
         url: `/getLive`,
         method: "POST",
@@ -24,7 +24,14 @@ export const liveAPI = createApi({
       providesTags: ["Live"],
       transformResponse: (data: IGetLiveRes[]) => LiveDataTransform(data),
     }),
+    getBarcode: build.mutation<File, IGetBarcodeReq>({
+      query: (request) => ({
+        url: `/getBarcode`,
+        method: "POST",
+        body: request,
+      }),
+    }),
   }),
 });
 
-export const { useGetLiveQuery } = liveAPI;
+export const { useGetLiveQuery, useGetBarcodeMutation } = liveAPI;

@@ -1,3 +1,3 @@
 interface ILegend {
-  opacity: Records<string, string>
+  opacity: Records<string, string>;
 }

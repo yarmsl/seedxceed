@@ -1,17 +1,13 @@
-import { memo } from 'react';
-import { Box, SxProps, Typography } from "@mui/material"
+import { memo } from "react";
+import { Box, SxProps, Typography } from "@mui/material";
 
-const Step = ({number, children}: IStepProps) => {
+const Step = ({ number, children }: IStepProps) => {
   return (
     <Box sx={styles.wrapStep}>
       <Box sx={styles.number}>
-        <Typography sx={styles.numberText}>
-          0{number}
-        </Typography>
+        <Typography sx={styles.numberText}>0{number}</Typography>
       </Box>
-      <Typography sx={styles.textStep}>
-        {children}
-      </Typography>
+      <Typography sx={styles.textStep}>{children}</Typography>
     </Box>
   );
 };
@@ -24,7 +20,7 @@ const styles: Record<string, SxProps> = {
     borderRadius: "12px",
     display: "flex",
     alignItems: "center",
-    backgroundColor: "common.white"
+    backgroundColor: "common.white",
   },
   number: {
     backgroundColor: "#E3F2FD",
@@ -34,18 +30,18 @@ const styles: Record<string, SxProps> = {
     width: "32px",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   numberText: {
     color: "#2196F3",
     fontSize: "14px",
-    fontWeight: 500
+    fontWeight: 500,
   },
   textStep: {
     color: "common.black",
     fontSize: "14px",
-    width: "calc(100% - 40px)"
-  }
-}
+    width: "calc(100% - 40px)",
+  },
+};
 
 export default memo(Step);

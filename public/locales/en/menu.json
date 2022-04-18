@@ -38,10 +38,13 @@
   "user": "User",
   "complaints": "Complaints",
   "favorite": "Favorite",
+  "basket": "Basket",
   "darkside": "Dark Side",
   "darkMode": "Dark mode",
   "lightMode": "Light mode",
   "reg": "Registration",
   "auth": "Authorization",
-  "forgot": "Forgot your password?"
+  "forgot": "Forgot your password?",
+  "timeline": "Timeline",
+  "orders": "Orders"
 }

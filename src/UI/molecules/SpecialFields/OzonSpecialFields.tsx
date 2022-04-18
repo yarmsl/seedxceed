@@ -9,8 +9,7 @@ import {
 import { ControlledAutocomplete } from "UI/atoms/ControlledTextFields";
 import OzonField from "./OzonField";
 
-const { color, icon } = marketPlaceConf.find((mp) => mp.mp === "oz") || {
-  color: "common.white",
+const { icon } = marketPlaceConf.find((mp) => mp.mp === "oz") || {
   icon: "",
 };
 
@@ -108,7 +107,6 @@ const OzonSpecialFields = () => {
 
 const styles: Record<string, SxProps> = {
   wrapper: {
-    bgcolor: "common.white",
     borderRadius: 1,
   },
   root: {
@@ -116,7 +114,7 @@ const styles: Record<string, SxProps> = {
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    bgcolor: `${color}33`,
+    bgcolor: "common.white",
     borderRadius: 1,
     p: "12px",
   },
@@ -136,7 +134,7 @@ const styles: Record<string, SxProps> = {
     width: "100%",
     display: "flex",
     justifyContent: "center",
-    color: color,
+    color: "primary.main",
   },
 };
 

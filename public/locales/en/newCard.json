@@ -20,6 +20,7 @@
   "currency": "$",
   "sm": "cm",
   "kg": "kg",
+  "pcs": "pcs",
   "requiredFields": "* - mandatory fields",
   "uploadPhotoes": "Upload photos",
   "from1to30": "From 1 to 30 photos",
@@ -31,5 +32,10 @@
   "photoes": "Photography",
   "videos": "Video",
   "from1to12videos": "1 to 12 videos",
-  "from1to12": "From 1 to 30 photos"
+  "from1to12": "From 1 to 30 photos",
+  "description": "Description",
+  "vendor": "Vendor",
+  "vendorCode": "Vendor code",
+  "boxCount": "Box count",
+  "certificate": "Certificate"
 }

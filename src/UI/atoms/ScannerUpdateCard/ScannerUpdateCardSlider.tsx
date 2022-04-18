@@ -95,8 +95,6 @@ const styles: Record<string, SxProps> = {
     bgcolor: "background.default",
     borderRadius: 1,
     justifyContent: "center",
-    boxShadow: "0px 25px 50px rgba(30, 136, 229, 0.2)", 
-
-    
+    boxShadow: "0px 25px 50px rgba(30, 136, 229, 0.2)",
   },
 };

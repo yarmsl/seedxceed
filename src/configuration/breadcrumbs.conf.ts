@@ -1,5 +1,3 @@
-import { TPath } from "./path.conf";
-
 export const breadcrumbsConf: {
   path: TPath;
   breadcrumb: string;
@@ -22,6 +20,7 @@ export const breadcrumbsConf: {
   { path: "/profile/user", breadcrumb: "profile" },
   { path: "/profile/payments", breadcrumb: "profile" },
   { path: "/profile/security", breadcrumb: "profile" },
-  { path: "/product/:id", breadcrumb: "myGoods", backwards: true  },
-  { path: "/live", breadcrumb: "Live"},
+  { path: "/product/:id", breadcrumb: "myGoods", backwards: true },
+  { path: "/live/timeline", breadcrumb: "Live" },
+  { path: "/live/orders", breadcrumb: "myGoods" },
 ];

@@ -30,6 +30,15 @@ interface IGetCategoryOzRes {
   response: ICategoryOzRes[] | false;
 }
 
+interface IGetCategoryYmRes extends IGetCategoryYmTransformedRes {
+  category_id: number | null;
+}
+
+interface IGetCategoryYmTransformedRes {
+  id: number;
+  title: string;
+}
+
 //Получение полей по категории
 interface IGetAllFieldsByCategoryReq {
   category_name: string;
@@ -134,7 +143,7 @@ interface IPostProductCardRes {
 }
 
 interface IPostProductCardYmRes {
-  status: string;
+  message: string;
 }
 //WB
 interface IPostProductCardWbReq {
@@ -204,23 +213,20 @@ interface IOzReqDataAttributesValues {
 
 //Ym
 interface IPostProductCardYmReq {
-  user_id: string[];
-  m: "ym";
-  data: {
-    shopSku: string;
-    name: string;
-    category: string;
-    countryProduction: string;
-    brand: string;
-    description: string;
-    pictures: string[];
-    price: string;
-    vendor: string;
-    vendorCode: string;
-    yandex_model: string;
-    urls: string[];
-    manufacturerCountries: string[];
-  };
+  shopSku: string;
+  name: string;
+  category: string;
+  manufacturerCountries: string[];
+  pictures: string[];
+  manufacturer?: string;
+  urls?: string[];
+  barcodes?: string[];
+  certificate?: string;
+  vendor?: string;
+  vendorCode?: string;
+  description?: string;
+  boxCount?: number;
+  price: string;
 }
 
 //getProducts

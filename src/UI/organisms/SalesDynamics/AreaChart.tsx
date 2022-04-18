@@ -1,5 +1,5 @@
 import { Box, SxProps } from "@mui/material";
-import { Fragment, memo, useCallback, useMemo } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Area,
@@ -10,138 +10,94 @@ import {
 } from "recharts";
 import { useAppSelector } from "store";
 
-import Loading from "UI/atoms/Loading/Loading";
-
-const AreaChartBrands = ({
-  isLoading,
-  salesDynamicsData,
-}: IBrandsTableProps) => {
+const AreaChartBrands = ({ isLoading, graphData }: IBrandsAreaChartProps) => {
   const { t } = useTranslation(["products", "date"]);
   const { darkMode } = useAppSelector((st) => st.ui);
 
-  const resZero = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["0"]),
-    [salesDynamicsData.graph]
-  );
+  const resZero = useMemo(() => graphData.map((el) => el["0"]), [graphData]);
 
   const valueZero = useMemo(
     () => resZero.reduce((summ, prev) => summ + prev, 0),
     [resZero]
   );
 
-  const resOne = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["1"]),
-    [salesDynamicsData.graph]
-  );
+  const resOne = useMemo(() => graphData.map((el) => el["1"]), [graphData]);
   const valueOne = useMemo(
     () => resOne.reduce((summ, prev) => summ + prev, 0),
     [resOne]
   );
 
-  const resTwo = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["2"]),
-    [salesDynamicsData.graph]
-  );
+  const resTwo = useMemo(() => graphData.map((el) => el["2"]), [graphData]);
 
   const valueTwo = useMemo(
     () => resTwo.reduce((summ, prev) => summ + prev, 0),
     [resTwo]
   );
 
-  const resThree = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["3"]),
-    [salesDynamicsData.graph]
-  );
+  const resThree = useMemo(() => graphData.map((el) => el["3"]), [graphData]);
 
   const valueThree = useMemo(
     () => resThree.reduce((summ, prev) => summ + prev, 0),
     [resThree]
   );
 
-  const resFour = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["4"]),
-    [salesDynamicsData.graph]
-  );
+  const resFour = useMemo(() => graphData.map((el) => el["4"]), [graphData]);
 
   const valueFour = useMemo(
     () => resFour.reduce((summ, prev) => summ + prev, 0),
     [resFour]
   );
 
-  const resFive = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["5"]),
-    [salesDynamicsData.graph]
-  );
+  const resFive = useMemo(() => graphData.map((el) => el["5"]), [graphData]);
 
   const valueFive = useMemo(
     () => resFive.reduce((summ, prev) => summ + prev, 0),
     [resFive]
   );
 
-  const resSix = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["6"]),
-    [salesDynamicsData.graph]
-  );
+  const resSix = useMemo(() => graphData.map((el) => el["6"]), [graphData]);
 
   const valueSix = useMemo(
     () => resSix.reduce((summ, prev) => summ + prev, 0),
     [resSix]
   );
 
-  const resSeven = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["7"]),
-    [salesDynamicsData.graph]
-  );
+  const resSeven = useMemo(() => graphData.map((el) => el["7"]), [graphData]);
 
   const valueSeven = useMemo(
     () => resSeven.reduce((summ, prev) => summ + prev, 0),
     [resSeven]
   );
 
-  const resEight = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["8"]),
-    [salesDynamicsData.graph]
-  );
+  const resEight = useMemo(() => graphData.map((el) => el["8"]), [graphData]);
 
   const valueEight = useMemo(
     () => resEight.reduce((summ, prev) => summ + prev, 0),
     [resEight]
   );
 
-  const resNine = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["9"]),
-    [salesDynamicsData.graph]
-  );
+  const resNine = useMemo(() => graphData.map((el) => el["9"]), [graphData]);
 
   const valueNine = useMemo(
     () => resNine.reduce((summ, prev) => summ + prev, 0),
     [resNine]
   );
 
-  const resTen = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["10"]),
-    [salesDynamicsData.graph]
-  );
+  const resTen = useMemo(() => graphData.map((el) => el["10"]), [graphData]);
 
   const valueTen = useMemo(
     () => resTen.reduce((summ, prev) => summ + prev, 0),
     [resTen]
   );
 
-  const resEleven = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["11"]),
-    [salesDynamicsData.graph]
-  );
+  const resEleven = useMemo(() => graphData.map((el) => el["11"]), [graphData]);
 
   const valueEleven = useMemo(
     () => resEleven.reduce((summ, prev) => summ + prev, 0),
     [resEleven]
   );
 
-  const resTwelve = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["12"]),
-    [salesDynamicsData.graph]
-  );
+  const resTwelve = useMemo(() => graphData.map((el) => el["12"]), [graphData]);
 
   const valueTwelve = useMemo(
     () => resTwelve.reduce((summ, prev) => summ + prev, 0),
@@ -149,8 +105,8 @@ const AreaChartBrands = ({
   );
 
   const resThirteen = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["13"]),
-    [salesDynamicsData.graph]
+    () => graphData.map((el) => el["13"]),
+    [graphData]
   );
 
   const valueThirteen = useMemo(
@@ -159,8 +115,8 @@ const AreaChartBrands = ({
   );
 
   const resFourteen = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["14"]),
-    [salesDynamicsData.graph]
+    () => graphData.map((el) => el["14"]),
+    [graphData]
   );
 
   const valueFourteen = useMemo(
@@ -169,8 +125,8 @@ const AreaChartBrands = ({
   );
 
   const resFiveteen = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["15"]),
-    [salesDynamicsData.graph]
+    () => graphData.map((el) => el["15"]),
+    [graphData]
   );
 
   const valueFiveteen = useMemo(
@@ -179,8 +135,8 @@ const AreaChartBrands = ({
   );
 
   const resSixteen = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["16"]),
-    [salesDynamicsData.graph]
+    () => graphData.map((el) => el["16"]),
+    [graphData]
   );
 
   const valueSixteen = useMemo(
@@ -189,8 +145,8 @@ const AreaChartBrands = ({
   );
 
   const resSeventeen = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["17"]),
-    [salesDynamicsData.graph]
+    () => graphData.map((el) => el["17"]),
+    [graphData]
   );
 
   const valueSeventeen = useMemo(
@@ -199,8 +155,8 @@ const AreaChartBrands = ({
   );
 
   const resEighteen = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["18"]),
-    [salesDynamicsData.graph]
+    () => graphData.map((el) => el["18"]),
+    [graphData]
   );
 
   const valueEighteen = useMemo(
@@ -209,8 +165,8 @@ const AreaChartBrands = ({
   );
 
   const resNineteen = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["19"]),
-    [salesDynamicsData.graph]
+    () => graphData.map((el) => el["19"]),
+    [graphData]
   );
 
   const valueNineteen = useMemo(
@@ -218,10 +174,7 @@ const AreaChartBrands = ({
     [resNineteen]
   );
 
-  const resTwenty = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["20"]),
-    [salesDynamicsData.graph]
-  );
+  const resTwenty = useMemo(() => graphData.map((el) => el["20"]), [graphData]);
 
   const valueTwenty = useMemo(
     () => resTwenty.reduce((summ, prev) => summ + prev, 0),
@@ -229,8 +182,8 @@ const AreaChartBrands = ({
   );
 
   const resTwentyOne = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["21"]),
-    [salesDynamicsData.graph]
+    () => graphData.map((el) => el["21"]),
+    [graphData]
   );
 
   const valueTwentyOne = useMemo(
@@ -239,8 +192,8 @@ const AreaChartBrands = ({
   );
 
   const resTwentyTwo = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["22"]),
-    [salesDynamicsData.graph]
+    () => graphData.map((el) => el["22"]),
+    [graphData]
   );
 
   const valueTwentyTwo = useMemo(
@@ -249,8 +202,8 @@ const AreaChartBrands = ({
   );
 
   const resTwentyThree = useMemo(
-    () => salesDynamicsData.graph.map((el) => el["23"]),
-    [salesDynamicsData.graph]
+    () => graphData.map((el) => el["23"]),
+    [graphData]
   );
 
   const valueTwentyThree = useMemo(
@@ -365,16 +318,28 @@ const AreaChartBrands = ({
     [t]
   );
 
+  const valueAll = data.map((el) => el["value"]);
+
+  const fail = useMemo(() => valueAll.every((elem) => elem === 0), [valueAll]);
+
   return (
-    <Box sx={styles.root}>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <Box sx={{ maxWidth: "1470px", maxHeight: "300px", height: "250px" }}>
-            <ResponsiveContainer width="100%" height="100%">
+    <>
+      {isLoading || fail === true ? null : (
+        <Box sx={styles.root}>
+          <Box
+            sx={{
+              maxWidth: "1465px",
+              maxHeight: "300px",
+              minWidth: "1465px",
+              height: "250px",
+              width: "100%",
+            }}
+          >
+            <ResponsiveContainer minWidth="1470px" width="100%" height="100%">
               <AreaChart
                 data={data}
+                width={500}
+                height={300}
                 margin={{ top: 10, right: 30, left: 60, bottom: 0 }}
               >
                 <defs>
@@ -402,19 +367,18 @@ const AreaChartBrands = ({
               </AreaChart>
             </ResponsiveContainer>
           </Box>
-        </>
+        </Box>
       )}
-    </Box>
+    </>
   );
 };
 
 const styles: Record<string, SxProps> = {
   root: {
-    height: { xs: "240px", sm: "250px" },
-    // width: { xs: "100%", md: "calc(100% - 412px)" },
-    bgcolor: "common.white",
-    borderTopLeftRadius: "12px",
-    borderTopRightRadius: "12px",
+    width: "100%",
+    minWidth: "1465px",
+    pl: "27px",
+    height: { xs: "251px", sm: "250px" },
   },
 
   dark: {

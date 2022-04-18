@@ -32,9 +32,7 @@ export const ScannerPageHeader = () => {
                   display: "flex",
                   flexDirection: "row",
                   paddingTop: "50px",
-                  paddingLeft: { xs: "15px" }
-
-
+                  paddingLeft: { xs: "15px" },
                 }}
               >
                 <ClockSvg />
@@ -55,10 +53,9 @@ export const ScannerPageHeader = () => {
 
 const styles: Record<string, SxProps> = {
   root: {
-    p:  {  md: "54px 60px 60px" },
-    zIndex:2,
+    p: { md: "54px 60px 60px" },
+    zIndex: 2,
     position: "relative",
-   
   },
   content: {
     flexGrow: 1,
@@ -68,7 +65,7 @@ const styles: Record<string, SxProps> = {
     p: "8px 0",
     color: "common.black",
     fontWeight: "bold",
-    paddingLeft: { xs: "15px" }
+    paddingLeft: { xs: "15px" },
   },
   icons: {
     paddingTop: "32px",
@@ -77,16 +74,12 @@ const styles: Record<string, SxProps> = {
     color: "common.black",
     fontSize: "22px",
     lineHeight: "30px",
-    paddingLeft: { xs: "15px" }
-
-
+    paddingLeft: { xs: "15px" },
   },
   clockText: {
     paddingTop: "2px",
     color: "#FFFFFF",
     textTransform: "uppercase",
-    paddingLeft: { xs: "5px" }
-
-
+    paddingLeft: { xs: "5px" },
   },
 };

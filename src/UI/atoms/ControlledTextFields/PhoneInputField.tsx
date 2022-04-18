@@ -27,7 +27,9 @@ const PhoneInputField = ({ name, ...rest }: IPhoneInputFieldProps) => {
   const { control, formState, setValue } = useFormContext();
   const { errors } = formState;
   const isValid = useCallback((value) => isPossiblePhoneNumber(value), []);
-  const [countryCode, setCountryCode] = useState((LANG === "ru" ? "RU" : "BR") as Country);
+  const [countryCode, setCountryCode] = useState(
+    (LANG === "ru" ? "RU" : "BR") as Country
+  );
   const [anchor, setAnchor] = useState<null | HTMLElement>(null);
   const divRef = useRef<HTMLElement>(null);
   const handleOpen = useCallback(() => setAnchor(divRef.current), []);

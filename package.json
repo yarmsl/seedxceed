@@ -51,15 +51,11 @@
     "build-dev": "dotenv -e .env.development react-scripts build",
     "build-dev-br": "dotenv -e .env.development.br react-scripts build && mv build build_br",
     "build-br": "dotenv -e .env.production.br react-scripts build && mv build build_br",
-    "lint": "eslint \"src/**/*.ts*\"",
+    "lint": "eslint \"src/**/*.ts*\" --fix",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject",
+    "sb": "start-storybook -p 6006 -s public",
+    "build-sb": "build-storybook -s public"
   },
   "browserslist": {
     "production": [
@@ -74,6 +70,16 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.4.19",
+    "@storybook/addon-essentials": "^6.4.19",
+    "@storybook/addon-interactions": "^6.4.19",
+    "@storybook/addon-links": "^6.4.19",
+    "@storybook/builder-webpack5": "^6.4.19",
+    "@storybook/manager-webpack5": "^6.4.19",
+    "@storybook/node-logger": "^6.4.19",
+    "@storybook/preset-create-react-app": "^4.1.0",
+    "@storybook/react": "^6.4.19",
+    "@storybook/testing-library": "^0.0.9",
     "@types/react-date-range": "^1.4.3",
     "@types/recharts": "^1.8.23",
     "@types/redux-mock-store": "^1.0.3",
@@ -81,7 +87,13 @@
     "@typescript-eslint/parser": "^5.9.1",
     "dotenv-cli": "^5.0.0",
     "eslint": "^8.6.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
-    "redux-mock-store": "^1.5.4"
+    "eslint-plugin-storybook": "^0.5.7",
+    "prettier": "^2.6.1",
+    "redux-mock-store": "^1.5.4",
+    "storybook-react-i18next": "^1.0.18",
+    "webpack": "^5.70.0"
   }
 }

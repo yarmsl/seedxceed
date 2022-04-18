@@ -1,5 +1,3 @@
-
-
 interface IMarketCardProps {
   marketName: supportedMarketTypes;
   cardTotalSales: number;

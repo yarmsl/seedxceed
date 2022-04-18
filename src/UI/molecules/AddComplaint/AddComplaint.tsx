@@ -1,18 +1,21 @@
-import {memo, useMemo, useState} from 'react';
+import { memo, useMemo, useState } from "react";
 import {
   Box,
   SxProps,
   TextField,
   MenuItem,
   Button,
-  CircularProgress
-} from "@mui/material"
-import {Controller, useForm} from "react-hook-form"
-import {useAppSelector} from "../../../store"
-import {useDispatch} from "react-redux"
-import {useLazyGetCompaniesComplaintsQuery, useAddParserTaskMutation} from "../../../store/DarkSide/DarkSide.service";
-import {getUserDataSelector} from "../../../store/User"
-import {showErrorSnackbar} from "../../../store/Notifications";
+  CircularProgress,
+} from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
+import { useAppSelector } from "../../../store";
+import { useDispatch } from "react-redux";
+import {
+  useLazyGetCompaniesComplaintsQuery,
+  useAddParserTaskMutation,
+} from "../../../store/DarkSide/DarkSide.service";
+import { getUserDataSelector } from "../../../store/User";
+import { showErrorSnackbar } from "../../../store/Notifications";
 
 const whatMatter = ["Проблемы с предложением", "Проблемы с магазином"];
 const storeReasons = [
@@ -36,15 +39,23 @@ const offerReasons = [
 ];
 
 const AddComplaint = (): JSX.Element => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [dis, setDis] = useState(true);
-  const {first_name, email} = useAppSelector(getUserDataSelector)
+  const { first_name, email } = useAppSelector(getUserDataSelector);
   const [
     queryCompanies,
     { currentData: resCompanies, isLoading: isCompaniesLoading },
   ] = useLazyGetCompaniesComplaintsQuery();
   const [addTask, { isLoading }] = useAddParserTaskMutation();
-  const { handleSubmit, control, reset, resetField, watch, formState, setError } = useForm({
+  const {
+    handleSubmit,
+    control,
+    reset,
+    resetField,
+    watch,
+    formState,
+    setError,
+  } = useForm({
     defaultValues: {
       search_string: "",
       without_company: [],
@@ -72,12 +83,19 @@ const AddComplaint = (): JSX.Element => {
   }, [wm]);
 
   const companies = useMemo(
-    () => Array.isArray(resCompanies?.response || "") ? resCompanies?.response : [],
+    () =>
+      Array.isArray(resCompanies?.response || "") ? resCompanies?.response : [],
     [resCompanies]
-  )
+  );
 
   const handleAddTask = handleSubmit(async (data) => {
-    const whiteList = [...data.without_company, ...data.brands.split(",").filter(br => br !== "").map(br => br.trim())]
+    const whiteList = [
+      ...data.without_company,
+      ...data.brands
+        .split(",")
+        .filter((br) => br !== "")
+        .map((br) => br.trim()),
+    ];
     if (whiteList.length === 0) {
       setError("brands", { type: "required" });
       setError("without_company", { type: "required" });
@@ -98,7 +116,9 @@ const AddComplaint = (): JSX.Element => {
       setDis(true);
     } catch (e) {
       const err =
-        e instanceof Error ? `User Data Error: ${e.message}` : "User Data Error";
+        e instanceof Error
+          ? `User Data Error: ${e.message}`
+          : "User Data Error";
       dispatch(showErrorSnackbar(err));
       reset();
       setDis(true);
@@ -106,12 +126,8 @@ const AddComplaint = (): JSX.Element => {
     }
   });
 
-
   return (
-    <Box
-      sx={styles.wrap}
-      component="form"
-    >
+    <Box sx={styles.wrap} component="form">
       <Controller
         name="search_string"
         control={control}
@@ -152,7 +168,7 @@ const AddComplaint = (): JSX.Element => {
           control={control}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              disabled={dis ? dis : (companies ? companies.length < 1 : false)}
+              disabled={dis ? dis : companies ? companies.length < 1 : false}
               size="small"
               label="Выберите компании (белый список)"
               select
@@ -172,8 +188,8 @@ const AddComplaint = (): JSX.Element => {
                 isCompaniesLoading
                   ? "Идёт загрузка списка компаний"
                   : error
-                    ? error.message
-                    : null
+                  ? error.message
+                  : null
               }
             >
               {companies?.map((company, i) => (
@@ -361,7 +377,7 @@ const styles: Record<string, SxProps> = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-  }
-}
+  },
+};
 
 export default memo(AddComplaint);

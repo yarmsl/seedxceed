@@ -3,6 +3,7 @@ type INewCardFormFields = {
   brand: string;
   country: string;
   depth: string;
+  description?: string;
   height: string;
   old_price?: string;
   premium_price?: string;
@@ -14,9 +15,15 @@ type INewCardFormFields = {
   price: string;
   oz_category?: ICategoryOzRes | null;
   wb_category?: ICategoryRes | null;
+  ym_category?: string[];
   images: Files[];
   videos: Files[];
   stereos: Files[];
   vat: TVat;
   oz?: Record<string, ISpecsOzRes | ISpecsOzRes[] | string | undefined>;
+  ym?: Record<string, number>;
+  certificate?: string;
+  vendor?: string;
+  vendorCode?: string;
+  boxCount?: string;
 };

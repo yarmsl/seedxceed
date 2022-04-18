@@ -12,16 +12,20 @@ const MegaTextField = ({
   minLength,
   maxLength,
   integer,
+  integerWithoutSpace,
   defaultValue,
   locale,
   changeLinks,
+  specialOnChange,
   ...rest
 }: IControlledTextFieldProps) => {
   const { t } = useTranslation("errors");
   const { control } = useFormContext();
   const specialChange = useCallback(
     (
-      e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+      e: ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >,
       value: string
     ) => {
       if (integer) {
@@ -30,12 +34,18 @@ const MegaTextField = ({
         );
         return res === "0" ? "" : res;
       } else if (changeLinks) {
-        return changeLinks(e.target.value, value)
+        return changeLinks(e.target.value, value);
+      } else if (specialOnChange) {
+        specialOnChange();
+        return e.target.value;
+      } else if (integerWithoutSpace) {
+        const res = (+e.target.value.replace(/[^\d]/g, "")).toString();
+        return res === "0" ? "" : res;
       } else {
         return e.target.value;
       }
     },
-    [integer, locale, changeLinks]
+    [integer, changeLinks, specialOnChange, locale, integerWithoutSpace]
   );
 
   return (

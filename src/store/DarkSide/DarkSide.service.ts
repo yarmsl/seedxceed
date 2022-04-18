@@ -42,46 +42,101 @@ export const complaintsAPI = createApi({
 export const FavoriteAPI = createApi({
   reducerPath: "FavoriteAPI",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${DATA_API_URL}/api/botproductup`,
+    baseUrl: `${DATA_API_URL}/api/botproductup/wb`,
     credentials: "include",
   }),
   tagTypes: ["Favorite"],
   endpoints: (build) => ({
     getFavorites: build.query<TaskFavorite[], number | null>({
       query: (user_id) => ({
-        url: `/getstatuses/${user_id}`,
-        method: "GET"
-      }),
-      providesTags: ["Favorite"],
-      transformResponse: (data: ResponseGetFavorite) => data.data
-    }),
-    createFavorite: build.mutation<ResponseCreateFavorite, RequestCreateFavorite>({
-      query: ({newLinks, id}: RequestCreateFavorite) => ({
-        url: `/wb/create/${id}`,
+        url: `/gettasks/${user_id}`,
         method: "POST",
         body: {
-          links: newLinks,
-          phone: ["9675558006", "9581119270"],
-          type: "favourite"
-        }
+          type: "favourite",
+        },
       }),
-      invalidatesTags: ["Favorite"],
-      transformResponse: (data: ResponseCreateFavorite) => data
+      providesTags: ["Favorite"],
+      transformResponse: (data: ResponseGetFavorite) => data.data,
     }),
-    startFavorite: build.mutation<ResponseStartFavorite, RequestStartFavorite>({
-      query: ({newLinks, id, task_id}: RequestStartFavorite) => ({
-        url: `/wb/favourite/start/${id}`,
+    createFavorite: build.mutation<
+      ResponseCreateFavorite,
+      RequestCreateFavorite
+    >({
+      query: ({ newLinks, id }: RequestCreateFavorite) => ({
+        url: `/create/${id}`,
         method: "POST",
         body: {
           links: newLinks,
           phone: ["9675558006", "9581119270"],
           type: "favourite",
-          task_id
-        }
-      })
-    })
-  })
-})
+        },
+      }),
+      invalidatesTags: ["Favorite"],
+      transformResponse: (data: ResponseCreateFavorite) => data,
+    }),
+    startFavorite: build.mutation<ResponseStartFavorite, RequestStartFavorite>({
+      query: ({ newLinks, id, task_id }: RequestStartFavorite) => ({
+        url: `/favourite/start/${id}`,
+        method: "POST",
+        body: {
+          links: newLinks,
+          phone: ["9675558006", "9581119270"],
+          type: "favourite",
+          task_id,
+        },
+      }),
+    }),
+  }),
+});
+
+export const BasketAPI = createApi({
+  reducerPath: "BasketAPI",
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${DATA_API_URL}/api/botproductup/wb`,
+    credentials: "include",
+  }),
+  tagTypes: ["Basket"],
+  endpoints: (build) => ({
+    getBasket: build.query<TaskFavorite[], number | null>({
+      query: (user_id) => ({
+        url: `/gettasks/${user_id}`,
+        method: "POST",
+        body: {
+          type: "basket",
+        },
+      }),
+      providesTags: ["Basket"],
+      transformResponse: (data: ResponseGetFavorite) => data.data,
+    }),
+    createBasket: build.mutation<ResponseCreateFavorite, RequestCreateFavorite>(
+      {
+        query: ({ newLinks, id }: RequestCreateFavorite) => ({
+          url: `/create/${id}`,
+          method: "POST",
+          body: {
+            links: newLinks,
+            phone: ["9675558006", "9581119270"],
+            type: "basket",
+          },
+        }),
+        invalidatesTags: ["Basket"],
+        transformResponse: (data: ResponseCreateFavorite) => data,
+      }
+    ),
+    startBasket: build.mutation<ResponseStartFavorite, RequestStartFavorite>({
+      query: ({ newLinks, id, task_id }: RequestStartFavorite) => ({
+        url: `/basket/start/${id}`,
+        method: "POST",
+        body: {
+          links: newLinks,
+          phone: ["9675558006", "9581119270"],
+          type: "basket",
+          task_id,
+        },
+      }),
+    }),
+  }),
+});
 
 export const {
   useAddParserTaskMutation,
@@ -95,5 +150,11 @@ export const {
 export const {
   useGetFavoritesQuery,
   useCreateFavoriteMutation,
-  useStartFavoriteMutation
-} = FavoriteAPI
+  useStartFavoriteMutation,
+} = FavoriteAPI;
+
+export const {
+  useGetBasketQuery,
+  useCreateBasketMutation,
+  useStartBasketMutation,
+} = BasketAPI;

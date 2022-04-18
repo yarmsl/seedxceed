@@ -14,8 +14,8 @@ i18n
       backendOptions: [
         {
           expirationTime: 3 * 24 * 60 * 60 * 1000,
-          defaultVersion: "v3.83",
-          versions: { en: "v3.83", ru: "v3.83", pt: "v3.83" },
+          defaultVersion: "v3.92",
+          versions: { en: "v3.92", ru: "v3.92", pt: "v3.92" },
         },
         {},
       ],

@@ -31,7 +31,7 @@ export const ScannerPageRates = () => {
         <Box
           sx={{
             display: "flex",
-            flexDirection: { xs: "column", md: "row", sm:"row" },
+            flexDirection: { xs: "column", md: "row", sm: "row" },
             justifyContent: "center",
             alignItems: "center",
             flexWrap: "wrap",
@@ -47,13 +47,13 @@ export const ScannerPageRates = () => {
 };
 
 const styles: Record<string, SxProps> = {
-  root:{ 
+  root: {
     width: { xs: "calc(100% - 12px)", sm: "509px" },
   },
   title: {
     p: "60px 0 32px 0",
     color: "common.black",
-    fontSize: {xs: "24px"},
-    fontWeight: {xs: 700}
+    fontSize: { xs: "24px" },
+    fontWeight: { xs: 700 },
   },
 };

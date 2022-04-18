@@ -1,10 +1,16 @@
+interface IBrandsAreaChartProps {
+  isLoading: boolean;
+  graphData: IHoursDataTransformed[];
+}
+
+interface ITableWeekProps {
+  isLoading: boolean;
+  graphData: IHoursDataTransformed[];
+}
+
 interface IBrandsTableProps {
   isLoading: boolean;
-  salesDynamicsData: ISalesDynamicsTransformedRes;
-  format?: (
-    value: string | number,
-    maxSum: string | number
-  ) => JSX.Element | string | number;
+  brandsData: IBrandsTransformedData[];
 }
 
 interface ITableWeekColunms {

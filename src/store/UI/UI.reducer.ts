@@ -1,17 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { LANG } from "configuration/baseUrls";
+import { endOfWeek, startOfWeek } from "date-fns";
+import { ptBR, ru } from "date-fns/locale";
 import { getExchangeRateThunkAction } from "./UI.actions";
+
+const weekStartDay = startOfWeek(new Date(), {
+  locale: LANG === "ru" ? ru : ptBR,
+});
+
+const weekEndDay = endOfWeek(new Date(), {
+  locale: LANG === "ru" ? ru : ptBR,
+});
 
 const initialState: UIState = {
   locale: LANG,
   burgerMenu: false,
   darkMode: false,
   langType: LANG,
+  jhonWeekSelector: { d: weekStartDay, dd: weekEndDay },
   calendarSelector: { d: 30, dd: 30 },
   timeStampSelector: 30,
   shopSelector: [],
   mpSelector: [],
-  liveTypesSelector: ["orders", "sales", "returns", "cancellation"],
   exchangeRate: 1,
   warningWindow: { count: 0, timestamp: new Date() },
 };
@@ -32,6 +42,9 @@ const UISlice = createSlice({
     toggleDarkMode: (state) => {
       state.darkMode = state.darkMode ? false : true;
     },
+    setWeek: (state, action: PayloadAction<ICalendarSelectorNew>) => {
+      state.jhonWeekSelector = action.payload;
+    },
     setCalendar: (state, action: PayloadAction<ICalendarSelector>) => {
       state.calendarSelector = action.payload;
     },
@@ -43,9 +56,6 @@ const UISlice = createSlice({
     },
     setMPs: (state, action: PayloadAction<supportedMarketTypes[]>) => {
       state.mpSelector = action.payload;
-    },
-    setLiveTypes: (state, action: PayloadAction<LiveNotifTypes[]>) => {
-      state.liveTypesSelector = action.payload;
     },
     setWarningWindowProps: (state) => {
       state.warningWindow = {
@@ -69,11 +79,11 @@ export const {
   toggleBurgerMenu,
   closeBurgerMenu,
   toggleDarkMode,
+  setWeek,
   setCalendar,
   setTimeStamp,
   setMPs,
   setShops,
-  setLiveTypes,
   setWarningWindowProps,
 } = UISlice.actions;
 export const { reducer: UIReducer } = UISlice;

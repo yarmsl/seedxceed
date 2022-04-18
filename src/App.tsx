@@ -22,7 +22,7 @@ const App = (): ReactElement => {
   const isCheckedAuth = useAppSelector(isAuthCheckedSelector);
   const { role } = useAppSelector((st) => st.user.data);
   const { darkMode, locale } = useAppSelector((st) => st.ui);
-  const currentTheme = useMemo(() => theme(darkMode), [darkMode]);
+  const currentTheme = useMemo(() => createTheme(theme(darkMode)), [darkMode]);
 
   useEffect(() => {
     if (LANG === "ru") {
@@ -36,7 +36,7 @@ const App = (): ReactElement => {
 
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={createTheme(currentTheme)}>
+      <ThemeProvider theme={currentTheme}>
         <CssBaseline />
         <BrowserRouter>
           <Router isAuth={isAuth} isCheckedAuth={isCheckedAuth} role={role} />

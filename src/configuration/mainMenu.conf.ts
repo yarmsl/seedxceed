@@ -35,7 +35,7 @@ export const mainMenuConf: IMainMenuItemConf[] = [
     access: "customer",
   },
   {
-    title: "SXC Маркет",
+    title: "Маркет",
     path: "https://market.seed-x-ceed.com",
     externalPath: true,
     Icon: marketIcon,

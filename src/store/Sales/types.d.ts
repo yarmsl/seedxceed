@@ -125,7 +125,6 @@ interface IBrandData {
   all_count: number;
   all_price: number;
   date: string;
-  brand: string;
 }
 
 interface IBrandsTransformedData {
@@ -167,13 +166,11 @@ interface IHoursDataTransformed extends IHoursData {
   day: DaysType;
 }
 
-
 interface IBrandTableData {
   all_count: number;
   all_price: number;
   date: string;
   brand: string;
-
 }
 
 //getBrands

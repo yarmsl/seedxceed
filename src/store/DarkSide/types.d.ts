@@ -55,7 +55,7 @@ interface IDataStatusTasks {
 type ResponseGetFavorite = {
   data: TaskFavorite[];
   tasks_count: number;
-}
+};
 
 // type ResponseCreateFavorite = {
 //   data: TransformedResponseCreateFavorite;
@@ -68,13 +68,13 @@ type ResponseCreateFavorite = {
     products: ProductFavorite[];
     status: string;
     user_id: number;
-  }
-}
+  };
+};
 
 type RequestCreateFavorite = {
   newLinks: string[];
   id: number | null;
-}
+};
 
 interface RequestStartFavorite {
   newLinks: string[];
@@ -92,8 +92,8 @@ interface TaskFavorite {
     id: number;
     status: string;
     updated_at: string;
-    user_id: number
-  }
+    user_id: number;
+  };
   products: ProductFavorite[];
   products_count: number;
 }
@@ -140,5 +140,3 @@ type reasonTypes =
 
 type addTaskStatusTypes = "successfully" | "request incorrectly.";
 type addTaskMessageTypes = "Parser start work." | "error";
-
-

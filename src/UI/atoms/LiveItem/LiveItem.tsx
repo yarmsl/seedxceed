@@ -1,4 +1,4 @@
-import { Box, SxProps, Typography, Tooltip } from "@mui/material";
+import { Box, SxProps, Typography, Tooltip, Divider } from "@mui/material";
 import { memo, useMemo } from "react";
 import { ReactComponent as OrdersIcon } from "../../../assets/icons/orders.svg";
 import { ReactComponent as SalesIcon } from "../../../assets/icons/sales.svg";
@@ -8,6 +8,7 @@ import { marketPlaceConf } from "configuration/marketPlace.conf";
 import { useTranslation } from "react-i18next";
 import Image from "../Image/Image";
 import { currency, dateWithTime } from "lib/helpers";
+import { useNavigate } from "react-router-dom";
 
 const LiveItem = ({ data, type }: ILiveItemProps) => {
   const { t } = useTranslation("live");
@@ -19,8 +20,25 @@ const LiveItem = ({ data, type }: ILiveItemProps) => {
         return OrdersIcon;
       case "returns":
         return ReturnsIcon;
-      default:
+      case "cancellation":
         return CancellationIcon;
+      default:
+        return SalesIcon;
+    }
+  }, [type]);
+
+  const typeColor = useMemo(() => {
+    switch (type) {
+      case "sales":
+        return "#00C853";
+      case "orders":
+        return "#2196F3";
+      case "returns":
+        return "#ED6C02";
+      case "cancellation":
+        return "#D84315";
+      default:
+        return "#00C853";
     }
   }, [type]);
 
@@ -37,58 +55,80 @@ const LiveItem = ({ data, type }: ILiveItemProps) => {
     [data]
   );
 
+  const nav = useNavigate();
+
   return (
-    <Box sx={styles.root}>
-      <Box sx={styles.type}>
-        <TypeLogo />
-        <Typography>{t(type)}</Typography>
-      </Box>
-      <Box sx={styles.lives}>
-        {data.map((live, i) => (
-          <Box sx={styles.live} key={`${type}-${i}-${live.date}`}>
-            <Box sx={styles.wrap}>
-              <Box sx={styles.main}>
-                <Image img={live.photo} />
-                <Tooltip title={live.name}>
-                  <Typography sx={styles.name}>{live.name}</Typography>
-                </Tooltip>
-              </Box>
-              <Box sx={styles.mpLogo}>
-                <Tooltip title={live.brand}>
-                  <Typography sx={styles.brand}>{live.brand}</Typography>
-                </Tooltip>
-                {MpLogo && <MpLogo />}
-              </Box>
-            </Box>
-            <Typography sx={styles.price}>
-              {currency(live.total_price)}
-            </Typography>
+    <Box sx={styles.wrapper}>
+      <Box sx={styles.root}>
+        <Box sx={{ ...styles.typeBox, color: typeColor }}>
+          <Box sx={{ ...styles.type, borderColor: typeColor }}>
+            <TypeLogo />
+            <Typography>{t(type)}</Typography>
           </Box>
-        ))}
-        {isMany && (
+        </Box>
+        <Box sx={styles.lives}>
+          {data.map((live, i) => (
+            <Box sx={styles.live} key={`${type}-${i}-${live.date}`}>
+              <Box sx={styles.wrap}>
+                <Box
+                  onClick={() =>
+                    nav(
+                      `/product/${live.nm_id}/${live.user_id}/${live.marketplace}`
+                    )
+                  }
+                  sx={styles.main}
+                >
+                  <Image img={live.photo} />
+                  <Tooltip title={live.name}>
+                    <Typography sx={styles.name}>{live.name}</Typography>
+                  </Tooltip>
+                </Box>
+                <Box sx={styles.mpLogo}>
+                  <Tooltip title={live.brand}>
+                    <Typography sx={styles.brand}>{live.brand}</Typography>
+                  </Tooltip>
+                  {MpLogo && <MpLogo />}
+                </Box>
+              </Box>
+              <Typography sx={styles.price}>
+                {currency(live.total_price)}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+        <Typography sx={styles.date}>{dateWithTime(data[0].date)}</Typography>
+      </Box>
+      {isMany && (
+        <>
+          <Divider />
           <Box sx={styles.total}>
             <Typography>{`${t`total`}: ${total}`}</Typography>
           </Box>
-        )}
-      </Box>
-      <Typography sx={styles.date}>{dateWithTime(data[0].date)}</Typography>
+        </>
+      )}
     </Box>
   );
 };
 
 const styles: Record<string, SxProps> = {
+  wrapper: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    borderRadius: 1,
+    bgcolor: "background.default",
+  },
   root: {
     width: "100%",
     display: "flex",
     justifyContent: "space-between",
-    borderRadius: 1,
     p: { xs: "12px", md: "12px 6%" },
-    bgcolor: "background.default",
     flexWrap: { xs: "wrap", md: "nowrap" },
   },
-  type: {
+  typeBox: {
     width: "150px",
     display: "flex",
+    alignItems: "flex-start",
     mr: "12px",
     mb: { xs: "12px", md: "0px" },
     pt: { xs: "0px", md: "16px" },
@@ -98,6 +138,14 @@ const styles: Record<string, SxProps> = {
       height: "24px",
       mr: "6px",
     },
+  },
+  type: {
+    p: "4px 8px",
+    display: "flex",
+    borderWidth: "1px",
+    borderColor: "common.black",
+    borderStyle: "solid",
+    borderRadius: 2,
   },
   lives: {
     flexGrow: 1,
@@ -126,9 +174,13 @@ const styles: Record<string, SxProps> = {
   main: {
     display: "flex",
     alignItems: "center",
+    "&:hover": {
+      cursor: "pointer",
+      textDecoration: "underline",
+    },
   },
   name: {
-    width: { xs: "130px", sm: "200px" },
+    width: { xs: "130px", sm: "200px", lg: "340px" },
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
@@ -143,7 +195,7 @@ const styles: Record<string, SxProps> = {
     },
   },
   brand: {
-    width: "100px",
+    width: { md: "100px", lg: "130px" },
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
@@ -160,7 +212,8 @@ const styles: Record<string, SxProps> = {
   },
   total: {
     alignSelf: "flex-end",
-    mr: { xs: "6px", md: "32px" },
+    mr: { xs: "6px", md: "165px" },
+    p: { xs: "12px", md: "12px 6%" },
   },
   date: {
     width: { xs: "30%", md: "132px" },

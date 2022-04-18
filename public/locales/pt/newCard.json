@@ -20,6 +20,7 @@
   "currency": "R$",
   "sm": "cm",
   "kg": "qg",
+  "pcs": "pcs",
   "requiredFields": "* - campos obrigatórios",
   "uploadPhotoes": "Upload fotos",
   "from1to30": "De 1 a 30 fotos",
@@ -31,5 +32,10 @@
   "photoes": "Foto",
   "videos": "Vídeo",
   "from1to12videos": "1 a 12 vídeos",
-  "from1to12": "De 1 a 12 fotos"
+  "from1to12": "De 1 a 12 fotos",
+  "description": "Descrição",
+  "vendor": "Fornecedor",
+  "vendorCode": "Código do vendedor",
+  "boxCount": "Contagem de caixas",
+  "certificate": "Certificado"
 }

@@ -9,3 +9,8 @@ interface IOzonFieldProps {
   multiple: boolean;
   type: TFieldsOzType;
 }
+
+interface IYandexFieldProps {
+  index: number;
+  count: number;
+}

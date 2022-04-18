@@ -3,7 +3,7 @@ import { DATA_API_URL } from "../../configuration/baseUrls";
 import {
   getSalesDynamicsTransformResponse,
   getSalesTransformResponse,
-  getSalesBrands
+  getSalesBrands,
 } from "./Sales.transform";
 
 export const salesAPI = createApi({
@@ -55,7 +55,7 @@ export const salesAPI = createApi({
         body: data,
       }),
       transformResponse: (data: IBrandsRes, _, arg): IBrandsState[] =>
-        getSalesBrands(data, arg.m)
+        getSalesBrands(data, arg.m),
     }),
   }),
 });

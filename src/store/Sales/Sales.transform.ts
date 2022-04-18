@@ -1,3 +1,8 @@
+import { date } from "lib/helpers";
+import { LANG } from "../../configuration/baseUrls";
+
+const langData = () => (LANG === "pt" ? "pt-BR" : LANG);
+
 export const getSalesTransformResponse = ({
   response: data,
 }: IGetSalesRes): ISalesData => {
@@ -7,7 +12,7 @@ export const getSalesTransformResponse = ({
         ? Object.keys(data.graph)
             .sort((a, b) => new Date(a).getTime() - new Date(b).getTime())
             .map((key) => ({
-              date: new Date(key).toLocaleDateString(),
+              date: new Date(key).toLocaleDateString(langData()),
               sales: data.graph[key].sales_price,
               orders: data.graph[key].orders_price,
               profit: data.graph[key].profit_price,
@@ -19,7 +24,7 @@ export const getSalesTransformResponse = ({
         ? Object.keys(data.graph)
             .sort((a, b) => new Date(a).getTime() - new Date(b).getTime())
             .map((key) => ({
-              date: new Date(key).toLocaleDateString(),
+              date: new Date(key).toLocaleDateString(langData()),
               sales: data.graph[key].sales_count,
               orders: data.graph[key].orders_count,
               refunds: data.graph[key].returns_count,
@@ -93,15 +98,16 @@ export const getSalesDynamicsTransformResponse = (
 ): ISalesDynamicsTransformedRes => {
   const days: DaysType[] = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
   return {
-    brands: Array.isArray(data.brands)
-      ? data.brands?.map((brandData) => {
-          const brand = Object.keys(brandData)[0];
-          return {
-            brand,
-            graph: brandData[brand],
-          };
-        }) || []
-      : [],
+    brands:
+      Array.isArray(data.brands) && data.brands.length > 0
+        ? Object.keys(data.brands[0]).map((key) => ({
+            brand: key,
+            graph: data.brands[0][key].map((g) => ({
+              ...g,
+              date: date(g.date),
+            })),
+          }))
+        : [],
     graph:
       data.graph.mon != null
         ? days.map((day) => ({
@@ -116,9 +122,17 @@ export const getSalesBrands = (
   data: IBrandsRes,
   mp: supportedMarketTypes
 ): IBrandsState[] => {
-  return data.response != null ?
-    Object.keys(data.response).map(brand => ({...data.response[brand], brand})).map(item => {
-      return {...item, top_5_products: item.top_5_products.map(item => ({...item, mp}))}
-    })
-  : []
-}
+  return data.response != null
+    ? Object.keys(data.response)
+        .map((brand) => ({ ...data.response[brand], brand }))
+        .map((item) => {
+          return {
+            ...item,
+            top_5_products: item.top_5_products.map((item) => ({
+              ...item,
+              mp,
+            })),
+          };
+        })
+    : [];
+};

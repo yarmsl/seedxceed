@@ -8,19 +8,21 @@ import appStore, { persistor } from "./store";
 import { SnackbarProvider } from "notistack";
 import reportWebVitals from "./reportWebVitals";
 import "./i18n";
-
+import ErrorBoundary from "errorBoundary";
 
 ReactDOM.render(
   <StrictMode>
-    <StoreProvider store={appStore}>
-      <PersistGate persistor={persistor}>
-        <SnackbarProvider maxSnack={5} autoHideDuration={5000}>
-          <HelmetProvider>
-            <App />
-          </HelmetProvider>
-        </SnackbarProvider>
-      </PersistGate>
-    </StoreProvider>
+    <ErrorBoundary>
+      <StoreProvider store={appStore}>
+        <PersistGate persistor={persistor}>
+          <SnackbarProvider maxSnack={5} autoHideDuration={5000}>
+            <HelmetProvider>
+              <App />
+            </HelmetProvider>
+          </SnackbarProvider>
+        </PersistGate>
+      </StoreProvider>
+    </ErrorBoundary>
   </StrictMode>,
   document.getElementById("root")
 );

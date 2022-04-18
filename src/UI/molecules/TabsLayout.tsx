@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Loading from "UI/atoms/Loading/Loading";
 import { pathParse } from "lib/helpers";
+import { useScroll } from "lib/useScroll";
 
 interface ITabsLayoutProps {
   pageConf: {
@@ -16,7 +17,7 @@ const TabsLayout = ({ pageConf }: ITabsLayoutProps) => {
   const { t } = useTranslation("menu");
   const nav = useNavigate();
   const loc = useLocation();
-
+  const isScrollTop = useScroll();
   const tabIndex = useMemo(() => {
     const i = pageConf
       .map((page) => page.path)
@@ -24,9 +25,14 @@ const TabsLayout = ({ pageConf }: ITabsLayoutProps) => {
     return i < 0 ? 0 : i;
   }, [loc.pathname, pageConf]);
 
+  const tabsShadow = useMemo(
+    () => (isScrollTop ? styles.tabs : tabsWithShadow),
+    [isScrollTop]
+  );
+
   return (
     <Box sx={styles.root}>
-      <Tabs sx={styles.tabs} variant="scrollable" value={tabIndex}>
+      <Tabs sx={tabsShadow} variant="scrollable" value={tabIndex}>
         {pageConf.map((page) => {
           return (
             <Tab
@@ -57,10 +63,13 @@ const styles: Record<string, SxProps> = {
   },
   tabs: {
     width: "100%",
-    pl: "12px",
+    pl: { xs: "24px", md: "80px" },
+    pr: "24px",
     position: "fixed",
     bgcolor: "background.default",
     zIndex: "appBar",
+    left: 0,
+    transition: "box-shadow 250ms ease-in-out",
   },
   wrapper: {
     flexGrow: 1,
@@ -70,6 +79,11 @@ const styles: Record<string, SxProps> = {
     display: "flex",
     flexDirection: "column",
   },
+  shadow: {
+    boxShadow: "0px 4px 4px rgba(0,0,0,0.2)",
+  },
 };
+
+const tabsWithShadow = { ...styles.tabs, ...styles.shadow };
 
 export default memo(TabsLayout);

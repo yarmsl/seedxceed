@@ -1,0 +1,3 @@
+interface ISalesCardProps {
+  data: ISalesCardData;
+}

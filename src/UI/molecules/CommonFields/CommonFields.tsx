@@ -184,6 +184,18 @@ const CommonFields = () => {
               </MenuItem>
             ))}
           </ControlledTextField>
+          <ControlledTextField
+            name="description"
+            fullWidth
+            multiline
+            minRows={3}
+            maxRows={3}
+            label={t`description`}
+            type="text"
+            autoComplete="off"
+            size="small"
+            sx={styles.textfield}
+          />
         </Box>
       </Box>
       <Typography variant="body2" color="text.secondary">
@@ -216,6 +228,11 @@ const styles: Record<string, SxProps> = {
   },
   input: {
     height: "65px",
+  },
+  textfield: {
+    "& textarea": {
+      height: "86px!important",
+    },
   },
 };
 

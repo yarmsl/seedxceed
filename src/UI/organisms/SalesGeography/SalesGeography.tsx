@@ -6,8 +6,6 @@ import GeographyTable from "../../atoms/GeographyTable/GeographyTable";
 import { useGetSalesGeographyQuery } from "../../../store/Sales/Sales.service";
 import { useAppSelector } from "../../../store";
 import { useTranslation } from "react-i18next";
-import { IS_DEV } from "configuration/baseUrls";
-import { ddCrutch } from "lib/helpers";
 
 type SaleData = Record<string, ISale>;
 
@@ -19,45 +17,49 @@ interface IPieChart {
 }
 
 const SalesGeography = (): JSX.Element => {
-  const { calendarSelector, mpSelector, shopSelector, timeStampSelector } =
+  const { calendarSelector, mpSelector, shopSelector } =
     useAppSelector(uiSelector);
+  const { d, dd } = calendarSelector;
   const [orders, setOrders] = useState<IPieChart[]>([]);
   const [sales, setSales] = useState<IPieChart[]>([]);
-  const [colorsOrders, setColorsOrders] = useState<string[]>([])
-  const [colorsSales, setColorsSales] = useState<string[]>([])
+  const [colorsOrders, setColorsOrders] = useState<string[]>([]);
+  const [colorsSales, setColorsSales] = useState<string[]>([]);
   const { data } = useGetSalesGeographyQuery({
-    d: IS_DEV ? calendarSelector.d : timeStampSelector,
-    dd: IS_DEV ? calendarSelector.dd : ddCrutch(timeStampSelector),
+    d,
+    dd,
     m: mpSelector[0],
     user_id: [shopSelector[0]],
   });
   const { t } = useTranslation(["products", "common"]);
 
-  const colors = useMemo(() => ([
-    "#1abc9c",
-    "#3498db",
-    "#2ecc71",
-    "#34495e",
-    "#9b59b6",
-    "#16a085",
-    "#2980b9",
-    "#27ae60",
-    "#8e44ad",
-    "#2c3e50",
-    "#f1c40f",
-    "#f39c12",
-    "#c0392b",
-    "#e67e22",
-    "#341f97",
-    "#f368e0",
-    "#feca57",
-    "#48dbfb",
-    "#F97F51",
-    "#1B9CFC",
-    "#B33771",
-    "#BDC581"
+  const colors = useMemo(
+    () => [
+      "#1abc9c",
+      "#3498db",
+      "#2ecc71",
+      "#34495e",
+      "#9b59b6",
+      "#16a085",
+      "#2980b9",
+      "#27ae60",
+      "#8e44ad",
+      "#2c3e50",
+      "#f1c40f",
+      "#f39c12",
+      "#c0392b",
+      "#e67e22",
+      "#341f97",
+      "#f368e0",
+      "#feca57",
+      "#48dbfb",
+      "#F97F51",
+      "#1B9CFC",
+      "#B33771",
+      "#BDC581",
+    ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  ]), [data])
+    [data]
+  );
 
   useEffect(() => {
     let orders: IPieChart[] = [];
@@ -87,39 +89,38 @@ const SalesGeography = (): JSX.Element => {
     });
     setSales([...sales]);
 
-    const orderTempColors: string[] = []
-    const saleTempColors: string[] = []
+    const orderTempColors: string[] = [];
+    const saleTempColors: string[] = [];
 
-    orders = [...orders.slice(0, 11)]
-    sales = [...sales.slice(0, 11)]
+    orders = [...orders.slice(0, 11)];
+    sales = [...sales.slice(0, 11)];
 
     orders.forEach((order, i) => {
       sales.forEach((sale, j) => {
         if (order.name === sale.name) {
-          orderTempColors[i] = colors[0]
-          saleTempColors[j] = colors[0]
-          colors.shift()
+          orderTempColors[i] = colors[0];
+          saleTempColors[j] = colors[0];
+          colors.shift();
         }
-      })
-    })
+      });
+    });
 
     orders.forEach((_, idx) => {
       if (!orderTempColors[idx]) {
-        orderTempColors[idx] = colors[0]
-        colors.shift()
+        orderTempColors[idx] = colors[0];
+        colors.shift();
       }
-    })
+    });
 
     sales.forEach((_, idx) => {
       if (!saleTempColors[idx]) {
-        saleTempColors[idx] = colors[0]
-        colors.shift()
+        saleTempColors[idx] = colors[0];
+        colors.shift();
       }
-    })
+    });
 
-    setColorsOrders([...orderTempColors])
-    setColorsSales([...saleTempColors])
-
+    setColorsOrders([...orderTempColors]);
+    setColorsSales([...saleTempColors]);
   }, [data, colors]);
 
   return (

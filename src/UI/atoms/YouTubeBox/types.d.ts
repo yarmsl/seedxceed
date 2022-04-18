@@ -1,3 +1,3 @@
 interface IYouTubeBoxProps {
-    embedId: string;
+  embedId: string;
 }

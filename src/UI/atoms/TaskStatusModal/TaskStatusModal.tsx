@@ -10,7 +10,7 @@ import {
   TableRow,
   Tooltip,
   Typography,
-  SxProps
+  SxProps,
 } from "@mui/material";
 import { memo, useMemo } from "react";
 import { useGetStatusTasksQuery } from "../../../store/DarkSide/DarkSide.service";
@@ -82,7 +82,7 @@ const styles: Record<string, SxProps> = {
     width: "100%",
     height: "350px",
     overflow: "hidden",
-    backgroundColor: "background.default"
+    backgroundColor: "background.default",
   },
   loader: {
     width: "100%",

@@ -1,12 +1,20 @@
-import { Box, SxProps, Typography } from "@mui/material";
+import { Box, InputAdornment, SxProps, Typography } from "@mui/material";
 import { marketPlaceConf } from "configuration/marketPlace.conf";
+import { memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { ControlledTextField } from "UI/atoms/ControlledTextFields";
+import YandexField from "./YandexField";
 
-const { color, icon } = marketPlaceConf.find((mp) => mp.mp === "ym") || {
-  color: "common.white",
+const { icon } = marketPlaceConf.find((mp) => mp.mp === "ym") || {
   icon: "",
 };
 
+const count = 6;
+
 const YandexSpecialFields = () => {
+  const { t } = useTranslation("newCard");
+  const fields = useMemo(() => Array(count).fill("f"), []);
+
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.root}>
@@ -16,6 +24,48 @@ const YandexSpecialFields = () => {
           </Typography>
           <img src={icon} alt="ym" />
         </Box>
+        {fields.map((_, i) => (
+          <YandexField key={i} count={count} index={i} />
+        ))}
+        <ControlledTextField
+          name="certificate"
+          fullWidth
+          size="small"
+          label={t`certificate`}
+          autoComplete="off"
+          sx={styles.input}
+        />
+        <ControlledTextField
+          name="vendor"
+          fullWidth
+          size="small"
+          label={t`vendor`}
+          autoComplete="off"
+          sx={styles.input}
+        />
+        <ControlledTextField
+          name="vendorCode"
+          fullWidth
+          size="small"
+          label={t`vendorCode`}
+          autoComplete="off"
+          sx={styles.input}
+        />
+        <ControlledTextField
+          name="boxCount"
+          fullWidth
+          size="small"
+          label={t`boxCount`}
+          type="text"
+          integer
+          autoComplete="off"
+          sx={styles.input}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">{t`pcs`}</InputAdornment>
+            ),
+          }}
+        />
       </Box>
     </Box>
   );
@@ -31,8 +81,8 @@ const styles: Record<string, SxProps> = {
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    bgcolor: `${color}1A`,
     borderRadius: 1,
+    bgcolor: "common.white",
     p: "12px",
   },
   title: {
@@ -44,6 +94,9 @@ const styles: Record<string, SxProps> = {
       ml: "12px",
     },
   },
+  input: {
+    height: "64px",
+  },
 };
 
-export default YandexSpecialFields;
+export default memo(YandexSpecialFields);

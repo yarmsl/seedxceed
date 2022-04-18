@@ -1,4 +1,3 @@
 export const ScannerForm = () => {
-    return <>Автовосстановитель</>;
-  };
-  
+  return <>Автовосстановитель</>;
+};

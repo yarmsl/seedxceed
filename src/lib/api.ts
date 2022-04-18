@@ -14,7 +14,7 @@ export const apiPost = async <T, K>(
   });
   if (!response.ok) {
     if (resHandler === "json") {
-      const err = await response.json()
+      const err = await response.json();
       throw new Error(err.message);
     } else {
       throw new Error(response.statusText);

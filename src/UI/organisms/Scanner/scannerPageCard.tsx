@@ -68,7 +68,7 @@ const styles: Record<string, SxProps> = {
   title: {
     p: "8px 0",
     color: "#FFFFFF",
-    mt: {xs: "30px"}
+    mt: { xs: "30px" },
   },
   icons: {
     paddingTop: "32px",

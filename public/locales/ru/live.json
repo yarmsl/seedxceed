@@ -4,5 +4,20 @@
   "returns": "Возврат",
   "cancellation": "Отмена",
   "total": "Всего",
-  "show": "Показывать"
+  "show": "Показывать",
+  "dateTime": "Дата/Время",
+  "photo": "Фото",
+  "nameBrand": "Название/Бренд",
+  "sum": "Сумма",
+  "status": "Статус",
+  "new": "Новый",
+  "inAssembly": "В сборке",
+  "assembled": "Собран",
+  "archived": "В архиве",
+  "actions": "Действия",
+  "docs": "Документы",
+  "markSelfRedemption": "Отметить как самовыкуп",
+  "submitAssembly": "Отправить на сборку",
+  "generateBarcode": "Сгенерировать штрихкод",
+  "barcode": "Штрихкод"
 }

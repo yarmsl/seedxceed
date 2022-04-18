@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getUserThunkAction, editDataProfile, changePasswordUser, getPaymentsUser } from "./User.actions";
+import {
+  getUserThunkAction,
+  editDataProfile,
+  changePasswordUser,
+  getPaymentsUser,
+} from "./User.actions";
 
 const initialState: IUserState = {
   isUserDataLoading: false,
@@ -27,7 +32,7 @@ const initialState: IUserState = {
     token_wb: null,
     created_at: null,
     updated_at: null,
-  }
+  },
 };
 
 const UserSlice = createSlice({
@@ -55,10 +60,13 @@ const UserSlice = createSlice({
     builder.addCase(editDataProfile.pending, (state) => {
       state.isUserRequestLoading = true;
     });
-    builder.addCase(editDataProfile.fulfilled, (state, action: PayloadAction<Partial<IUser>>) => {
-      state.isUserRequestLoading = false;
-      state.data = { ...state.data, ...action.payload };
-    });
+    builder.addCase(
+      editDataProfile.fulfilled,
+      (state, action: PayloadAction<Partial<IUser>>) => {
+        state.isUserRequestLoading = false;
+        state.data = { ...state.data, ...action.payload };
+      }
+    );
     builder.addCase(changePasswordUser.pending, (state) => {
       state.isUserUpdatePassLoading = true;
     });
@@ -68,13 +76,16 @@ const UserSlice = createSlice({
     builder.addCase(getPaymentsUser.pending, (state) => {
       state.isPaymentsDataLoading = true;
     });
-    builder.addCase(getPaymentsUser.fulfilled, (state, action: PayloadAction<IPaymentRes>) => {
-      state.isPaymentsDataLoading = false;
-      state.payments = action.payload.response
-    });
+    builder.addCase(
+      getPaymentsUser.fulfilled,
+      (state, action: PayloadAction<IPaymentRes>) => {
+        state.isPaymentsDataLoading = false;
+        state.payments = action.payload.response;
+      }
+    );
     builder.addCase(getPaymentsUser.rejected, (state) => {
       state.isPaymentsDataLoading = false;
-    })
+    });
   },
 });
 

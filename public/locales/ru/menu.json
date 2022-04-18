@@ -38,10 +38,13 @@
   "user": "Пользователь",
   "complaints": "Жалобы",
   "favorite": "Избранное",
+  "basket": "Корзина",
   "darkside": "Dark Side",
   "darkMode": "Темный режим",
   "lightMode": "Светлый режим",
   "reg": "Регистрация",
   "auth": "Авторизация",
-  "forgot": "Забыли пароль?"
+  "forgot": "Забыли пароль?",
+  "timeline": "Лента",
+  "orders": "Заказы"
 }

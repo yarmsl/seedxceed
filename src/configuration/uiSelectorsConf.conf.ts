@@ -1,33 +1,25 @@
-import { TPath } from "./path.conf";
-
-export const uiSelectorsConf: {
-  path: TPath;
-  tsType: "period" | "calendar" | "both" | "week" | null;
-  mpsType: "multiple" | "mono" | null;
-  ssType: "multiple" | "mono" | null;
-  liveType?: "multiple";
-}[] = [
+export const uiSelectorsConf: IUiSelectorsConf[] = [
   {
     path: "/dashboard",
-    tsType: "both",
+    tsType: "period",
     mpsType: "multiple",
     ssType: "multiple",
   },
   {
     path: "/mysales/sales",
-    tsType: "both",
+    tsType: "period",
     mpsType: "mono",
     ssType: "multiple",
   },
   {
     path: "/mysales/brands",
-    tsType: "both",
+    tsType: "period",
     mpsType: "mono",
     ssType: "multiple",
   },
   {
     path: "/mysales/goods",
-    tsType: "both",
+    tsType: "period",
     mpsType: "mono",
     ssType: "multiple",
   },
@@ -39,13 +31,13 @@ export const uiSelectorsConf: {
   },
   {
     path: "/mysales/sales_geography",
-    tsType: "both",
+    tsType: "period",
     mpsType: "mono",
     ssType: "multiple",
   },
   {
     path: "/mygoods/goods",
-    tsType: "both",
+    tsType: "period",
     mpsType: "mono",
     ssType: "multiple",
   },
@@ -116,10 +108,15 @@ export const uiSelectorsConf: {
     ssType: null,
   },
   {
-    path: "/live",
-    tsType: "both",
+    path: "/live/timeline",
+    tsType: null,
     mpsType: "multiple",
     ssType: null,
-    liveType: "multiple",
+  },
+  {
+    path: "/live/orders",
+    tsType: null,
+    mpsType: "multiple",
+    ssType: null,
   },
 ];

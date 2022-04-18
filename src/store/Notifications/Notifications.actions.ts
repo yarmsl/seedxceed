@@ -68,7 +68,7 @@ export const closeSnackbarAction = (key?: SnackbarKey) => {
 };
 
 export const removeSnackbarAction = (key: SnackbarKey) => {
-    return (dispatch: (arg0: unknown) => void): void => {
-      dispatch(removeSnackbar(key));
-    };
+  return (dispatch: (arg0: unknown) => void): void => {
+    dispatch(removeSnackbar(key));
   };
+};

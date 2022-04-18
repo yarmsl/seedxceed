@@ -4,12 +4,12 @@ import { isTokensConsistMp } from "store/Dashboard";
 import { useGetBrandsQuery } from "store/Sales";
 import Brands from "../../UI/organisms/Brands/Brands";
 import HelmetTitle from "../../UI/atoms/Helmet";
-import { IS_DEV } from "configuration/baseUrls";
-import { ddCrutch } from "lib/helpers";
 
 const BrandsPage = () => {
-  const { calendarSelector, mpSelector, shopSelector, timeStampSelector } =
-    useAppSelector((st) => st.ui);
+  const { calendarSelector, mpSelector, shopSelector } = useAppSelector(
+    (st) => st.ui
+  );
+  const { d, dd } = calendarSelector;
   const isTokensOfMp = useAppSelector(isTokensConsistMp);
   const isConsistense = useCallback(
     (mp: supportedMarketTypes, tokens: string[]) => isTokensOfMp(mp, tokens),
@@ -25,8 +25,8 @@ const BrandsPage = () => {
 
   const { data, isFetching } = useGetBrandsQuery(
     {
-      d: IS_DEV ? calendarSelector.d : timeStampSelector,
-      dd: IS_DEV ? calendarSelector.dd : ddCrutch(timeStampSelector),
+      d,
+      dd,
       m: mpSelector[0],
       user_id: shopSelector,
     },

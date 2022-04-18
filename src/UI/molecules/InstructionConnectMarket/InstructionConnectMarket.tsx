@@ -76,15 +76,15 @@ const InstructionConnectMarket = ({
           <>{t`ymHowTo1`}</>,
           <>
             {t`ymHowTo2a`}{" "}
-            <Box component={"span"} >
-            <Button
-              sx={{ ml: "12px" }}
-              variant="contained"
-              href={t`ymHowTo3Link`}
-              target="_blank"
-            >
-              {t`ymHowTo2b`}
-            </Button>
+            <Box component={"span"}>
+              <Button
+                sx={{ ml: "12px" }}
+                variant="contained"
+                href={t`ymHowTo3Link`}
+                target="_blank"
+              >
+                {t`ymHowTo2b`}
+              </Button>
             </Box>{" "}
             {t`ymHowTo2c`}
           </>,

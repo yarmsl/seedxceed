@@ -122,6 +122,8 @@
   "loadGoogs": "Mercadorias são carregadas",
   "quantityPcs": "Quantidade, pcs",
   "ordersPcs": "Encomendas, pcs",
-  "salesPcs": "Vendas, pcs"
+  "salesPcs": "Vendas, pcs",
+  "failData": "Sem dados para o período selecionado"
+
 
 }

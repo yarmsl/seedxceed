@@ -38,6 +38,18 @@ export const date = (str: string) => {
   }
 };
 
+export const toLocDate = (date: Date) => {
+  let locale = "ru-RU";
+  if (LANG === "pt") {
+    locale = "pt-BR";
+  }
+  return new Date(date).toLocaleDateString(locale, {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+  });
+};
+
 export const dateWithTime = (str: string) => {
   let locale = "ru-RU";
   if (LANG === "pt") {

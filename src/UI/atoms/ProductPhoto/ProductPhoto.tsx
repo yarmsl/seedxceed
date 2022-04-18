@@ -6,7 +6,7 @@ import { ReactComponent as PhIcon } from "../../../assets/logo/icon.svg";
 const ProductPhoto = ({ photo, title, link }: IProductPhotoProps) => {
   const [err, setErr] = useState(false);
   const { t } = useTranslation("products");
-  
+
   return (
     <Box sx={styles.root}>
       <Box sx={styles.image}>

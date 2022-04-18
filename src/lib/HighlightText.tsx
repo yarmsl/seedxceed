@@ -29,6 +29,6 @@ export const HighlightText = ({ text, highlight }: IHighlightTextProps) => {
 const styles: Record<string, SxProps> = {
   highlight: {
     bgcolor: "primary.main",
-    color: "white"
+    color: "white",
   },
 };

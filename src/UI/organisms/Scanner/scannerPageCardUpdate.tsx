@@ -46,7 +46,7 @@ const styles: Record<string, SxProps> = {
   title: {
     color: "common.black",
     fontWeight: "bold",
-    textAlign: {xs: "center"}
+    textAlign: { xs: "center" },
   },
   icon: {
     paddingRight: "20px",

@@ -1,8 +1,8 @@
 import { Box, SxProps } from "@mui/material";
 import { useMedia } from "lib/useMedia";
 import { memo, useMemo } from "react";
-import SalesCard from "UI/atoms/SalesCard/SalesCard";
-import SalesCardSkeleton from "UI/atoms/SalesCard/SalesCardSkeleton";
+import SalesCard from "UI/molecules/SalesCard/SalesCard";
+import SalesCardSkeleton from "UI/molecules/SalesCard/SalesCardSkeleton";
 import Carousel from "../Carousel/Carousel";
 
 const SalesCardsConnected = ({
@@ -21,7 +21,7 @@ const SalesCardsConnected = ({
       {!isLoading ? (
         <Carousel slidesPerView={sPv} spaceBetween={12} draggable loop>
           {data.map((sale) => (
-            <SalesCard key={sale.title} data={sale} />
+            <SalesCard key={sale.title} {...sale} />
           ))}
         </Carousel>
       ) : (

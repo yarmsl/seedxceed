@@ -118,7 +118,9 @@ const ProductsTable = ({
             <TableBody>
               {products.map((product, i) => (
                 <TableRow
-                  onClick={() => nav(`/product/${product.nm_id}/${product.user_id}/${mp}`)}
+                  onClick={() =>
+                    nav(`/product/${product.nm_id}/${product.user_id}/${mp}`)
+                  }
                   sx={darkMode ? styles.rowdark : styles.rowlight}
                   key={`row-${i}-${page}-${search}-${mp}-${order}-${orderBy}-${productsCount}`}
                 >

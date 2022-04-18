@@ -12,7 +12,7 @@ export const selectedMpsSelector = createSelector(
 export const selectedShopsSelector = createSelector(
   uiSelector,
   (ui) => ui.shopSelector
-)
+);
 
 export const selectedLabeledMpsSelector = createSelector(
   selectedMpsSelector,

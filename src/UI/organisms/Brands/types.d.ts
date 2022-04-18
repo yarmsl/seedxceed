@@ -8,12 +8,12 @@ interface IBrand {
   orders_price: number;
   orders_price_changes: number;
   summary: ISummary;
-  top_5_products: Product[]
+  top_5_products: Product[];
 }
 
 type IBrandTransformed = Omit<IBrand, "graph"> & {
   graph: IGraphDataBrand[];
-}
+};
 
 interface IBrandsState extends IBrand {
   brand: string;
@@ -27,9 +27,9 @@ interface ISummary {
   sales: number;
 }
 
-type Product = {count: number, name: string, photo: string}
+type Product = { count: number; name: string; photo: string };
 
-type Graph = Record<string, {orders_price: number, sales_price: number}>
+type Graph = Record<string, { orders_price: number; sales_price: number }>;
 
 interface IGraphDataBrand {
   date: string;

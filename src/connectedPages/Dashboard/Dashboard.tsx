@@ -15,13 +15,14 @@ import YouTubeBox from "UI/atoms/YouTubeBox/YouTubeBox";
 import TopSales from "UI/molecules/TopSales/TopSales";
 import ScannerBanner from "UI/atoms/ScannerBanner/ScannerBanner";
 import SupportWindow from "UI/molecules/SupportWindow/SupportWindow";
-import { LANG, IS_DEV } from "configuration/baseUrls";
-import { ddCrutch } from "lib/helpers";
+import { LANG } from "configuration/baseUrls";
 
 const DashboardPage = () => {
   const dispatch = useAppDispatch();
-  const { timeStampSelector, calendarSelector, mpSelector, shopSelector } =
-    useAppSelector((st) => st.ui);
+  const { calendarSelector, mpSelector, shopSelector } = useAppSelector(
+    (st) => st.ui
+  );
+  const { d, dd } = calendarSelector;
   const { data, isLoading: isDAllLoading } = useGetDashboardAllQuery("");
   const [getDasboard, { isFetching, isLoading }] = useLazyGetDashboardQuery();
   const cardsListData = useMemo(
@@ -46,8 +47,8 @@ const DashboardPage = () => {
         const shops = selectedShopsByMp(mp);
         if (shops.length > 0) {
           getDasboard({
-            d: IS_DEV ? calendarSelector.d : timeStampSelector,
-            dd: IS_DEV ? calendarSelector.dd : ddCrutch(timeStampSelector),
+            d,
+            dd,
             user_id: shops,
             m: mp,
           });
@@ -57,14 +58,13 @@ const DashboardPage = () => {
       });
     }
   }, [
-    calendarSelector.d,
-    calendarSelector.dd,
+    d,
+    dd,
     dispatch,
     getDasboard,
     mpSelector,
     selectedShopsByMp,
     shopSelector,
-    timeStampSelector,
   ]);
 
   return (

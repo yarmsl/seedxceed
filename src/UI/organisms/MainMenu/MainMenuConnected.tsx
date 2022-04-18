@@ -10,7 +10,7 @@ import NotifButton from "UI/atoms/NotifButton/NotifButton";
 import ProfileButton from "UI/atoms/ProfileButton/ProfileButton";
 import SignOutButton from "UI/atoms/SignOutButton/SignOutButton";
 import LangSwitcher from "UI/molecules/LangSwitcher/LangSwitcher";
-import { IS_DEV, LANG } from "../../../configuration/baseUrls";
+import { LANG } from "../../../configuration/baseUrls";
 
 const MainMenuConnected = () => {
   const { t } = useTranslation("menu");
@@ -41,7 +41,7 @@ const MainMenuConnected = () => {
       </Box>
       <Box sx={styles.bottomControls}>
         <Box sx={styles.bottomControls}>
-          {IS_DEV && <NotifButton />}
+          <NotifButton />
           <ProfileButton />
         </Box>
         {LANG === "pt" && <LangSwitcher />}
